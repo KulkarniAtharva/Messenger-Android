@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/chats"
+        android:icon="@drawable/chat"
+        android:title="Chats"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/story"
+        android:icon="@drawable/story"
+        android:title="Story"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/call"
+        android:icon="@drawable/add_call"
+        android:title="Calls"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/person"
+        android:icon="@drawable/person"
+        android:title="Account"
+        app:showAsAction="ifRoom"/>
+</menu>
