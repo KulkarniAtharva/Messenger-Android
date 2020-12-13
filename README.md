@@ -8,3 +8,25 @@
 Android Chat Application developed using Android Studio & Firebase.
 
 Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts) & deleting a message too!
+
+
+## Features
+
+- 1-1 Chats
+- Group chat
+- Delete a chat message
+- Delete/clear all chat
+- User profile (change username, userphoto)
+- User status
+- Full chat history
+- Send/receive chat messages
+- Sent status
+- Delivered status
+- Read status
+- 'is typing' status
+- Global search
+- Unread messages count
+- Block list
+- Last message
+- Chat notifications
+- Attachments
