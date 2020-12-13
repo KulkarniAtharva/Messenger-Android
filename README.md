@@ -35,5 +35,7 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 ## Built With
 
 - Android - JAVA
-- Firebase - 
+- Firebase
+   - Firebase Authentication
+   - Firebase Cloud Firestore
 - Databinding
