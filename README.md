@@ -30,3 +30,10 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - Last message
 - Chat notifications
 - Attachments
+
+
+## Built With
+
+- Android - JAVA
+- Firebase - 
+- Databinding
