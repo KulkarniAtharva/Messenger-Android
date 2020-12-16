@@ -40,3 +40,7 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
    - Firebase Cloud Firestore
    - Firebase Storage
 - Databinding
+- Room Database
+- MVVM Architecture
+- RxJava
+- RecyclerView
