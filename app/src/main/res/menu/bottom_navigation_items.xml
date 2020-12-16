@@ -14,6 +14,11 @@
         android:title="Story"
         app:showAsAction="ifRoom"/>
     <item
+        android:id="@+id/friends"
+        android:icon="@drawable/person_outline"
+        android:title="Friends"
+        app:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/call"
         android:icon="@drawable/add_call"
         android:title="Calls"

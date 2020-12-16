@@ -17,10 +17,18 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import dev.atharvakulkarni.messenger.databinding.SigninSignupBinding;
 
@@ -29,25 +37,34 @@ public class signin_signup extends AppCompatActivity
     ConstraintLayout signin_page,signup_page;
     Button continue_btn, signup_button;
     TextView signin,signup;
-    EditText username_edittext,password_edittext;
+    TextInputEditText signin_username_edittext,signin_password_edittext,name_edittext,signup_username_edittext,signup_password_edittext,signup_reenterpassword_edittext;
     SigninSignupBinding signinSignupBinding;
     // SignInSignUpViewModel signInSignUpViewModel;
     private FirebaseAuth mAuth;
-    String username,password;
+    String username,password,name,signup_username,signup_password,signup_reenterpassword;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.signin_signup);
         signinSignupBinding = DataBindingUtil.setContentView(this, R.layout.signin_signup);
 
         signin_page = signinSignupBinding.signinPage;
         signup_page = signinSignupBinding.signupPage;
         continue_btn = signinSignupBinding.continueButton;
-        signup_button = signinSignupBinding.signupButton;
+        signup_button = signinSignupBinding.signupbutton;
         signin = signinSignupBinding.signin;
         signup = signinSignupBinding.signup;
+        signin_username_edittext = signinSignupBinding.username;
+        signin_password_edittext = signinSignupBinding.password;
+        signup_username_edittext = signinSignupBinding.username2;
+        signup_password_edittext = signinSignupBinding.password2;
+        name_edittext = signinSignupBinding.name;
+        signup_reenterpassword_edittext = signinSignupBinding.reenterPassword;
+
+
+        db = FirebaseFirestore.getInstance();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -60,8 +77,10 @@ public class signin_signup extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(signin_signup.this, MainActivity.class);
-                startActivity(intent);
+                username = signin_username_edittext.getText().toString()+"@gmail.com";
+                password = signin_password_edittext.getText().toString();
+
+                loginUserAccount(username,password);
             }
         });
 
@@ -70,13 +89,15 @@ public class signin_signup extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                username = username_edittext.getText().toString()+"@gmail.com";
-                password = password_edittext.getText().toString();
+                name = name_edittext.getText().toString();
+                signup_username = signup_username_edittext.getText().toString()+"@gmail.com";
+                signup_password = signup_password_edittext.getText().toString();
+                signup_reenterpassword = signup_reenterpassword_edittext.getText().toString();
 
-                loginUserAccount(username,password);
-
-                Intent intent = new Intent(signin_signup.this,MainActivity.class);
-                startActivity(intent);
+                if(signup_password.equals(signup_reenterpassword))
+                    signupUserAccount(name,signup_username,signup_password);
+                else
+                    Toast.makeText(signin_signup.this, "Password did not match", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -99,6 +120,9 @@ public class signin_signup extends AppCompatActivity
                 signup_page.setVisibility(View.VISIBLE);
             }
         });
+
+
+
     }
 
     private void loginUserAccount(String username,String password)
@@ -112,7 +136,7 @@ public class signin_signup extends AppCompatActivity
                 {
                     // Sign in success, update UI with the signed-in user's information
                   //  Log.d(TAG, "signInWithEmail:success");
-                    FirebaseUser user = mAuth.getCurrentUser();
+                   // FirebaseUser user = mAuth.getCurrentUser();
                     // updateUI(user);
 
                     Toast.makeText(signin_signup.this, "Success", Toast.LENGTH_SHORT).show();
@@ -129,5 +153,36 @@ public class signin_signup extends AppCompatActivity
                 }
             }
         });
+
+
+
+
+    }
+
+    private void signupUserAccount(String name,String username,String password)
+    {
+        mAuth.createUserWithEmailAndPassword(username, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            Toast.makeText(signin_signup.this, "Success", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(signin_signup.this,MainActivity.class);
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            // If sign in fails, display a message to the user.
+                          //  Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(signin_signup.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+
+                        // ...
+                    }
+                });
     }
 }

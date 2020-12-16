@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
                 {
                     case R.id.chats:
 
-                        fragment = new Mark_attendance();
+                        fragment = new Chats();
                         switchfragment(fragment);
 
                         return true;
@@ -47,6 +47,12 @@ public class MainActivity extends AppCompatActivity
 
                       //  fragment = new History();
                        // switchfragment(fragment);
+
+                        break;
+                    case R.id.friends:
+
+                          fragment = new Friends();
+                          switchfragment(fragment);
 
                         break;
                     case R.id.person:

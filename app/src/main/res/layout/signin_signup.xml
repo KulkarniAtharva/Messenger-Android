@@ -71,7 +71,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/email"
+                    android:id="@+id/username"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black"/>
 
@@ -239,7 +239,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email_textinputlayout2"
+                android:id="@+id/username_textinputlayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -247,7 +247,7 @@
                 app:layout_constraintTop_toBottomOf="@id/name_textinputlayout"
                 android:paddingStart="25dp"
                 android:paddingEnd="25dp"
-                android:hint="Email"
+                android:hint="Username"
                 android:textColorHint="@color/green"
                 app:endIconDrawable="@drawable/email"
                 app:endIconMode="custom"
@@ -256,7 +256,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/email2"
+                    android:id="@+id/username2"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black"/>
 
@@ -268,7 +268,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/email_textinputlayout2"
+                app:layout_constraintTop_toBottomOf="@id/username_textinputlayout2"
                 android:paddingStart="25dp"
                 android:paddingEnd="25dp"
                 android:hint="Password"
@@ -312,7 +312,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/signup_button"
+                android:id="@+id/signupbutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -332,7 +332,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/signup_button"
+                app:layout_constraintTop_toBottomOf="@id/signupbutton"
                 android:layout_marginTop="30dp">
 
                 <TextView
