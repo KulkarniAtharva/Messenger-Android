@@ -38,4 +38,5 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - Firebase
    - Firebase Authentication
    - Firebase Cloud Firestore
+   - Firebase Storage
 - Databinding
