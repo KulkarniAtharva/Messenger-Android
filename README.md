@@ -30,6 +30,7 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - Last message
 - Chat notifications
 - Attachments
+- Online/ Offline & Last Seen 
 
 
 ## Built With
