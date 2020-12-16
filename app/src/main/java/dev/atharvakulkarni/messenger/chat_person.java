@@ -103,7 +103,6 @@ public class chat_person extends AppCompatActivity
             msg.put("sent time", saveCurrentTime);
             msg.put("sent date", saveCurrentDate);
             msg.put("text", message);
-            msg.put("status", "Online");
 
             // Add a new document with a generated ID
             db.collection("Atharva").document("person").collection("Adwait").document("message").set(msg).addOnSuccessListener(new OnSuccessListener<Void>()

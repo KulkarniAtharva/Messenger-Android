@@ -27,6 +27,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,6 +45,7 @@ public class signin_signup extends AppCompatActivity
     private FirebaseAuth mAuth;
     String username,password,name,signup_username,signup_password,signup_reenterpassword;
     FirebaseFirestore db;
+    private String saveCurrentTime, saveCurrentDate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -62,7 +65,6 @@ public class signin_signup extends AppCompatActivity
         signup_password_edittext = signinSignupBinding.password2;
         name_edittext = signinSignupBinding.name;
         signup_reenterpassword_edittext = signinSignupBinding.reenterPassword;
-
 
         db = FirebaseFirestore.getInstance();
 
@@ -125,6 +127,19 @@ public class signin_signup extends AppCompatActivity
 
     }
 
+    private String getCurrentDateTime()
+    {
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        saveCurrentDate = currentDate.format(calendar.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+        saveCurrentTime = currentTime.format(calendar.getTime());
+
+        return saveCurrentDate+", "+saveCurrentTime;
+    }
+
     private void loginUserAccount(String username,String password)
     {
         mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
@@ -170,6 +185,7 @@ public class signin_signup extends AppCompatActivity
                         if (task.isSuccessful())
                         {
                             Toast.makeText(signin_signup.this, "Success", Toast.LENGTH_SHORT).show();
+                            createUser();
 
                             Intent intent = new Intent(signin_signup.this,MainActivity.class);
                             startActivity(intent);
@@ -180,8 +196,71 @@ public class signin_signup extends AppCompatActivity
                           //  Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(signin_signup.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
+                    }
+                });
 
-                        // ...
+
+
+    }
+
+    void createUser()
+    {
+        // Create a new user with a first and last name
+        Map<String, Object> info = new HashMap<>();
+        info.put("name", name);
+        info.put("status", "Online");
+        info.put("Last Seen",getCurrentDateTime());
+
+        // Add a new document with a generated ID
+        db.collection(signup_username).document("info").set(info).addOnSuccessListener(new OnSuccessListener<Void>()
+        {
+            private static final String TAG = "a";
+
+            @Override
+            public void onSuccess(Void aVoid)
+            {
+                //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                Toast.makeText(signin_signup.this, "success", Toast.LENGTH_SHORT).show();
+            }
+        })
+                .addOnFailureListener(new OnFailureListener()
+                {
+                    private static final String TAG = "b";
+
+                    @Override
+                    public void onFailure(@NonNull Exception e)
+                    {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+
+
+
+        // Create a new user with a first and last name
+        Map<String, Object> user = new HashMap<>();
+        user.put("name", name);
+
+
+        // Add a new document with a generated ID
+        db.collection("users").document(signup_username).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
+        {
+            private static final String TAG = "a";
+
+            @Override
+            public void onSuccess(Void aVoid)
+            {
+                //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                Toast.makeText(signin_signup.this, "success", Toast.LENGTH_SHORT).show();
+            }
+        })
+                .addOnFailureListener(new OnFailureListener()
+                {
+                    private static final String TAG = "b";
+
+                    @Override
+                    public void onFailure(@NonNull Exception e)
+                    {
+                        Log.w(TAG, "Error adding document", e);
                     }
                 });
     }
