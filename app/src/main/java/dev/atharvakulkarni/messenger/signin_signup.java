@@ -206,9 +206,9 @@ public class signin_signup extends AppCompatActivity
     void createUser()
     {
         // Create a new user with a first and last name
-        Map<String, Object> info = new HashMap<>();
-        info.put("name", name);
-        info.put("status", "Online");
+      /*  Map<String, Object> info = new HashMap<>();
+        //info.put("name", name);
+        info.put("on_off_status", "Online");
         info.put("Last Seen",getCurrentDateTime());
 
         // Add a new document with a generated ID
@@ -232,17 +232,21 @@ public class signin_signup extends AppCompatActivity
                     {
                         Log.w(TAG, "Error adding document", e);
                     }
-                });
+                });*/
 
 
 
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
         user.put("name", name);
+        user.put("status","Good Morning");
+        user.put("photo","photo");
+        user.put("last seen",getCurrentDateTime());
+        user.put("on_off_status", "Online");
 
 
         // Add a new document with a generated ID
-        db.collection("users").document(signup_username).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
+        db.collection("users").document(signup_username.substring(0,signup_username.indexOf("@gmail.com"))).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
         {
             private static final String TAG = "a";
 
