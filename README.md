@@ -10,6 +10,9 @@ Android Chat Application developed using Android Studio & Firebase.
 Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts) & deleting a message too!
 
 
+## 📸 Screenshots
+
+
 ## Features
 
 - 1-1 Chats
@@ -30,6 +33,7 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - Last message
 - Chat notifications
 - Attachments
+- Online/ Offline & Last Seen 
 
 
 ## Built With
