@@ -26,12 +26,17 @@
             android:layout_weight="1"
             >
 
-            <TextView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/private_messages_list_of_users"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+          <!--  <TextView
                 android:id="@+id/message_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Atharva"
-                android:layout_gravity="right"/>
+                android:layout_gravity="right"/>   -->
 
 
         </FrameLayout>

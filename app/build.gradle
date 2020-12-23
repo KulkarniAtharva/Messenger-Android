@@ -53,5 +53,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }
