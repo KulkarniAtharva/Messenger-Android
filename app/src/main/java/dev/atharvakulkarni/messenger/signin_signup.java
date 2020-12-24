@@ -26,6 +26,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,7 +47,7 @@ public class signin_signup extends AppCompatActivity
     private FirebaseAuth mAuth;
     String username,password,name,signup_username,signup_password,signup_reenterpassword;
     FirebaseFirestore db;
-    private String saveCurrentTime, saveCurrentDate;
+    private String saveCurrentTime, saveCurrentDate,messageSenderId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -69,6 +71,7 @@ public class signin_signup extends AppCompatActivity
         db = FirebaseFirestore.getInstance();
 
         mAuth = FirebaseAuth.getInstance();
+        messageSenderId = mAuth.getCurrentUser().getUid();
 
         getWindow().setStatusBarColor(getResources().getColor(R.color.white,getTheme()));
 
@@ -196,6 +199,35 @@ public class signin_signup extends AppCompatActivity
                           //  Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(signin_signup.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
+                    }
+                });
+
+        Map<String, Object> user = new HashMap<>();
+        user.put("name", name);
+        user.put("userid", messageSenderId);
+
+
+
+        // Add a new document with a generated ID
+        db.collection("users").document(messageSenderId).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
+        {
+            private static final String TAG = "a";
+
+            @Override
+            public void onSuccess(Void aVoid)
+            {
+                //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                Toast.makeText(signin_signup.this, "success", Toast.LENGTH_SHORT).show();
+            }
+        })
+                .addOnFailureListener(new OnFailureListener()
+                {
+                    private static final String TAG = "b";
+
+                    @Override
+                    public void onFailure(@NonNull Exception e)
+                    {
+                        Log.w(TAG, "Error adding document", e);
                     }
                 });
 
