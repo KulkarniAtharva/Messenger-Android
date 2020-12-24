@@ -1,6 +1,7 @@
 package dev.atharvakulkarni.messenger;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -33,14 +34,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder>
 {
     private List<Messages1> userMessagesList;
-  //  private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
    // private DatabaseReference usersRef;
+    Context context;
 
     FirebaseFirestore db;
 
-    public MessageAdapter(List<Messages1> userMessagesList)
+    public MessageAdapter(List<Messages1> userMessagesList,Context context)
     {
         this.userMessagesList = userMessagesList;
+        this.context = context;
     }
 
     public class MessageViewHolder extends RecyclerView.ViewHolder
@@ -66,7 +69,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
     {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.custom_messages_layout, viewGroup, false);
-      //  mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         return new MessageViewHolder(view);
     }
@@ -74,12 +77,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public void onBindViewHolder(@NonNull final MessageViewHolder messageViewHolder, final int position)
     {
-      //  String messageSenderId = mAuth.getCurrentUser().getUid();
+        String messageSenderId = mAuth.getCurrentUser().getUid();
         Messages1 messages = userMessagesList.get(position);
 
-        messageViewHolder.senderMessageText.setText(messages.getText());
+      //  messageViewHolder.senderMessageText.setText(messages.getText());
 
-       // String fromUserID = messages.getFrom();
+       // Toast.makeText(context, messages.getText(), Toast.LENGTH_SHORT).show();
+
+        String fromUserID = messages.getFrom();
        // String fromMessageType = messages.getType();
 
        // usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(fromUserID);
@@ -112,7 +117,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
       //  messageViewHolder.messageSenderPicture.setVisibility(View.GONE);
       //  messageViewHolder.messageReceiverPicture.setVisibility(View.GONE);
 
-       /* if (fromMessageType.equals("text"))
+       // if (fromMessageType.equals("text"))
         {
             if (fromUserID.equals(messageSenderId))
             {
@@ -120,7 +125,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
             //    messageViewHolder.senderMessageText.setBackgroundResource(R.drawable.sender_messages_layout);
                 messageViewHolder.senderMessageText.setTextColor(Color.BLACK);
-                messageViewHolder.senderMessageText.setText(messages.getMessage() + "\n \n" + messages.getTime() + " - " + messages.getDate());
+                messageViewHolder.senderMessageText.setText(messages.getText() + "\n \n" + messages.getTime());// + " - " + messages.getDate());
             }
             else
             {
@@ -129,9 +134,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
              //   messageViewHolder.receiverMessageText.setBackgroundResource(R.drawable.receiver_messages_layout);
                 messageViewHolder.receiverMessageText.setTextColor(Color.BLACK);
-                messageViewHolder.receiverMessageText.setText(messages.getMessage() + "\n \n" + messages.getTime() + " - " + messages.getDate());
+                messageViewHolder.receiverMessageText.setText(messages.getText() + "\n \n" + messages.getTime());// + " - " + messages.getDate());
             }
-        }*/
+        }
         /*else if (fromMessageType.equals("image"))
         {
             if (fromUserID.equals(messageSenderId))

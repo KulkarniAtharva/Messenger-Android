@@ -1,35 +1,50 @@
 package dev.atharvakulkarni.messenger;
 
-public class Messages1 {
-    private String sent_by, sent_date, sent_time, text;
+public class Messages1
+{
+    private String date, from, text, time;
 
     public Messages1()
     {
 
     }
 
-    public Messages1(String sent_by, String sent_date, String sent_time, String text)
+    public Messages1(String date, String from, String text, String time)
     {
-        this.sent_by = sent_by;
-        this.sent_date = sent_date;
-        this.sent_time = sent_time;
+        this.date = date;
+        this.from = from;
         this.text = text;
+        this.time = time;
     }
 
-    public String getSent_by() {
-        return sent_by;
+   public String getTime()
+   {
+        return time;
     }
 
-    public void setSent_date(String sent_date) {
-        this.sent_date = sent_date;
+    public void setTime(String time)
+    {
+        this.time = time;
     }
 
-    public String getSent_time() {
-        return sent_time;
+    public String getDate()
+    {
+        return date;
     }
 
-    public void setSent_time(String sent_time) {
-        this.sent_time = sent_time;
+    public void setDate(String date)
+    {
+        this.date = date;
+    }
+
+    public String getFrom()
+    {
+        return from;
+    }
+
+    public void setFrom(String from)
+    {
+        this.from = from;
     }
 
     public String getText() {
