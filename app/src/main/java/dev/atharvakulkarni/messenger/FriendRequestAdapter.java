@@ -10,13 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHolder>
+public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdapter.ViewHolder>
 {
     RecyclerView recyclerView;
     Context context;
@@ -42,7 +40,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
         // Toast.makeText(context, getItemCount()+"", Toast.LENGTH_SHORT).show();
     }
 
-    public FriendsAdapter(RecyclerView recyclerView,Context context,ArrayList<String> name,ArrayList<String> lastmessage,ArrayList<String>count)
+    public FriendRequestAdapter(RecyclerView recyclerView,Context context,ArrayList<String> name,ArrayList<String> lastmessage,ArrayList<String>count)
     {
         this.recyclerView = recyclerView;
         this.context = context;
@@ -55,7 +53,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)   // to create view for recycler view item
     {
-        View view = LayoutInflater.from(context).inflate(R.layout.friends_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.friend_request_item,parent,false);
         return new ViewHolder(view);
     }
 
@@ -92,9 +90,9 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
                 .load(userphotouris.get(position))
                 .into(holder.circleImageView);*/
 
-     //   holder.name.setText(name.get(position));
-     //   holder.lastmessage.setText(lastmessage.get(position));
-      //  holder.count.setText(count.get(position));
+        //   holder.name.setText(name.get(position));
+        //   holder.lastmessage.setText(lastmessage.get(position));
+        //  holder.count.setText(count.get(position));
     }
 
     @Override
@@ -144,8 +142,8 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
 
                     context.startActivity(intent);*/
 
-                    Intent intent = new Intent(context,chat_person.class);
-                    context.startActivity(intent);
+                  //  Intent intent = new Intent(context,chat_person.class);
+                  //  context.startActivity(intent);
 
 
                     // denotes that we are going to view something

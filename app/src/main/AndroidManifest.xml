@@ -20,5 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".chat_person"/>
+        <activity android:name=".FriendRequest"/>
     </application>
 </manifest>

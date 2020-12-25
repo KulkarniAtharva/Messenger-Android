@@ -1,9 +1,11 @@
 package dev.atharvakulkarni.messenger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -25,6 +28,7 @@ public class Friends extends Fragment
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     FirebaseFirestore db;
+    FloatingActionButton floatingActionButton;
 
     @Nullable
     @Override
@@ -34,12 +38,22 @@ public class Friends extends Fragment
         View view = friendsBinding.getRoot();
 
         recyclerView = friendsBinding.recyclerView;
+        floatingActionButton = friendsBinding.requests;
         recyclerView.setVisibility(View.INVISIBLE);
 
         db = FirebaseFirestore.getInstance();
 
-
         recyclerView.setVisibility(View.VISIBLE);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getContext(),FriendRequest.class);
+                startActivity(intent);
+            }
+        });
 
         // recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 

@@ -82,7 +82,13 @@
                     android:id="@+id/send_request"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Send Request"
+                    android:text="Accept" />
+
+                <Button
+                    android:id="@+id/cancel_request"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
                     android:layout_alignParentRight="true"/>
 
             </RelativeLayout>
