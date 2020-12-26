@@ -1,16 +1,14 @@
 package dev.atharvakulkarni.messenger;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -21,34 +19,27 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
     RecyclerView recyclerView;
     Context context;
     ArrayList<String> name = new ArrayList<>();
-    ArrayList<String> lastmessage = new ArrayList<>();
-    ArrayList<String> count= new ArrayList<>();
+    ArrayList<String> photo = new ArrayList<>();
 
 
-    public void update(String name,String lastmessage,String count)
+   public void update(String name, String photo)
     {
         this.name.add(name);
-        this.lastmessage.add(lastmessage);
-        this.count.add(count);
-        /*duedates.add(due_date);
-        givendates.add(given_date);
-        description.add(des);
-        userphotouris.add(userphotoUri);*/
+        this.photo.add(photo);
 
-        //if(getItemCount() == 0)
-        //    Toast.makeText(context, "No Results Found", Toast.LENGTH_SHORT).show();
-        // else
-        notifyDataSetChanged();  // refreshes the recycler view automatically
+        if(getItemCount() == 0)
+           Toast.makeText(context, "No Results Found", Toast.LENGTH_SHORT).show();
+         else
+           notifyDataSetChanged();  // refreshes the recycler view automatically
         // Toast.makeText(context, getItemCount()+"", Toast.LENGTH_SHORT).show();
-    }
+   }
 
-    public FriendsAdapter(RecyclerView recyclerView,Context context,ArrayList<String> name,ArrayList<String> lastmessage,ArrayList<String>count)
+    public FriendsAdapter(RecyclerView recyclerView,Context context,ArrayList<String> name,ArrayList<String> photo)
     {
         this.recyclerView = recyclerView;
         this.context = context;
         this.name = name;
-        this.lastmessage = lastmessage;
-        this.count = count;
+        this.photo = photo;
     }
 
     @NonNull
@@ -56,6 +47,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)   // to create view for recycler view item
     {
         View view = LayoutInflater.from(context).inflate(R.layout.friends_item,parent,false);
+
         return new ViewHolder(view);
     }
 
@@ -92,8 +84,8 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
                 .load(userphotouris.get(position))
                 .into(holder.circleImageView);*/
 
-     //   holder.name.setText(name.get(position));
-     //   holder.lastmessage.setText(lastmessage.get(position));
+        holder.name.setText(name.get(position));
+        holder.photo.setText(photo.get(position));
       //  holder.count.setText(count.get(position));
     }
 
@@ -108,7 +100,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
         TextView filename,duedate,givendate,teachername;
         CircleImageView circleImageView;
 
-        TextView name,lastmessage,count;
+        TextView name,photo;
 
         public ViewHolder(View itemView)        // represents indiv list items
         {
@@ -119,9 +111,8 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
             teachername = itemView.findViewById(R.id.initial);
             circleImageView = itemView.findViewById(R.id.user_photo);*/
 
-            name = itemView.findViewById(R.id.id);
-            lastmessage = itemView.findViewById(R.id.type);
-            count = itemView.findViewById(R.id.count);
+            name = itemView.findViewById(R.id.name);
+            photo = itemView.findViewById(R.id.photo);
 
 
 
@@ -144,8 +135,8 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
 
                     context.startActivity(intent);*/
 
-                    Intent intent = new Intent(context,chat_person.class);
-                    context.startActivity(intent);
+                   // Intent intent = new Intent(context,chat_person.class);
+                   // context.startActivity(intent);
 
 
                     // denotes that we are going to view something

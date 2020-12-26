@@ -8,7 +8,8 @@ public class Messages {
 
     }
 
-    public Messages(String from, String message, String type, String to, String messageID, String time, String date, String name) {
+    public Messages(String from, String message, String type, String to, String messageID, String time, String date, String name)
+    {
         this.from = from;
         this.message = message;
         this.type = type;

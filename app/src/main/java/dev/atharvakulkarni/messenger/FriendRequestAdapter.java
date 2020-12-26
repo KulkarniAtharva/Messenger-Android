@@ -1,10 +1,10 @@
 package dev.atharvakulkarni.messenger;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,22 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdapter.ViewHolder>
 {
     RecyclerView recyclerView;
     Context context;
     ArrayList<String> name = new ArrayList<>();
-    ArrayList<String> lastmessage = new ArrayList<>();
-    ArrayList<String> count= new ArrayList<>();
+    ArrayList<String> photo = new ArrayList<>();
+    int flag;
 
-
-    public void update(String name,String lastmessage,String count)
+    public void update(String name,String photo,int flag)
     {
         this.name.add(name);
-        this.lastmessage.add(lastmessage);
-        this.count.add(count);
+        this.photo.add(photo);
+        this.flag = flag;
         /*duedates.add(due_date);
         givendates.add(given_date);
         description.add(des);
@@ -40,13 +37,12 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         // Toast.makeText(context, getItemCount()+"", Toast.LENGTH_SHORT).show();
     }
 
-    public FriendRequestAdapter(RecyclerView recyclerView,Context context,ArrayList<String> name,ArrayList<String> lastmessage,ArrayList<String>count)
+    public FriendRequestAdapter(RecyclerView recyclerView,Context context,ArrayList<String> name,ArrayList<String> photo)
     {
         this.recyclerView = recyclerView;
         this.context = context;
         this.name = name;
-        this.lastmessage = lastmessage;
-        this.count = count;
+        this.photo = photo;
     }
 
     @NonNull
@@ -90,8 +86,20 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
                 .load(userphotouris.get(position))
                 .into(holder.circleImageView);*/
 
-        //   holder.name.setText(name.get(position));
-        //   holder.lastmessage.setText(lastmessage.get(position));
+
+        if(flag == 1)
+        {
+            holder.buttons2.setVisibility(View.GONE);
+            holder.buttons1.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            holder.buttons2.setVisibility(View.VISIBLE);
+            holder.buttons1.setVisibility(View.GONE);
+        }
+
+           holder.name.setText(name.get(position));
+           holder.photo.setText(photo.get(position));
         //  holder.count.setText(count.get(position));
     }
 
@@ -103,10 +111,8 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView filename,duedate,givendate,teachername;
-        CircleImageView circleImageView;
-
-        TextView name,lastmessage,count;
+        TextView name,photo;
+        RelativeLayout buttons1,buttons2;
 
         public ViewHolder(View itemView)        // represents indiv list items
         {
@@ -117,11 +123,10 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
             teachername = itemView.findViewById(R.id.initial);
             circleImageView = itemView.findViewById(R.id.user_photo);*/
 
-            name = itemView.findViewById(R.id.id);
-            lastmessage = itemView.findViewById(R.id.type);
-            count = itemView.findViewById(R.id.count);
-
-
+            name = itemView.findViewById(R.id.name);
+            photo = itemView.findViewById(R.id.photo);
+            buttons1 = itemView.findViewById(R.id.buttons1);
+            buttons2 = itemView.findViewById(R.id.buttons2);
 
 
             itemView.setOnClickListener(new View.OnClickListener()

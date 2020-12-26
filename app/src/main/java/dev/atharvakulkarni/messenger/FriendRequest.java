@@ -1,9 +1,11 @@
 package dev.atharvakulkarni.messenger;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +15,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -27,6 +34,8 @@ public class FriendRequest extends AppCompatActivity
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     FirebaseFirestore db;
+    private FirebaseAuth mAuth;
+    String messageSenderId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -38,10 +47,10 @@ public class FriendRequest extends AppCompatActivity
        // View view = friendRequestBinding.getRoot();
 
         recyclerView = friendRequestBinding.recyclerView;
-        recyclerView.setVisibility(View.INVISIBLE);
 
         db = FirebaseFirestore.getInstance();
-
+        mAuth = FirebaseAuth.getInstance();
+        messageSenderId = mAuth.getCurrentUser().getUid();
 
         recyclerView.setVisibility(View.VISIBLE);
 
@@ -50,16 +59,80 @@ public class FriendRequest extends AppCompatActivity
         // custom adapters always
         // populate the recycler view with items
         linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
+       // linearLayoutManager.setReverseLayout(true);
+       // linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // recyclerView.setLayoutManager(new LinearLayoutManager(download.this));
-        FriendRequestAdapter myAdapter = new FriendRequestAdapter(recyclerView,this,new ArrayList<String>(),new ArrayList<String>(),new ArrayList<String>());
+        FriendRequestAdapter myAdapter = new FriendRequestAdapter(recyclerView,this,new ArrayList<String>(),new ArrayList<String>());
         recyclerView.setAdapter(myAdapter);
 
-        ((FriendRequestAdapter) recyclerView.getAdapter()).update("Atharva","Hi hello","2");
-        ((FriendRequestAdapter) recyclerView.getAdapter()).update("Atharva","Hi hello","2");
+        db.collection(messageSenderId).document("friend_requests").collection("friend_requests")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task)
+                    {
+                        if(task.isSuccessful())
+                        {
+                            for (QueryDocumentSnapshot document : task.getResult())
+                            {
+                                 Log.d("TAG", document.getId() + " => " + document.getData());
+
+                                String names = document.getString("name");
+                                String photo = document.getString("photo");
+
+                                // Toast.makeText(getContext(), names.get(0), Toast.LENGTH_SHORT).show();
+
+                                // myAdapter.notifyDataSetChanged();
+
+
+
+                                ((FriendRequestAdapter) recyclerView.getAdapter()).update(names,"pho",1);
+                            }
+                        }
+                        else
+                        {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task)
+                    {
+                        if(task.isSuccessful())
+                        {
+                            for (QueryDocumentSnapshot document : task.getResult())
+                            {
+                                 Log.d("TAG1", document.getId() + " => " + document.getData());
+
+                                String names = document.getString("name");
+                                String photo = document.getString("photo");
+
+                                // Toast.makeText(getContext(), names.get(0), Toast.LENGTH_SHORT).show();
+
+                                //myAdapter.notifyDataSetChanged();
+
+
+
+                                ((FriendRequestAdapter) recyclerView.getAdapter()).update(names,photo,0);
+
+
+                            }
+                        }
+                        else
+                        {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
 
 
     }

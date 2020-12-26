@@ -142,6 +142,8 @@ public class chat_person extends AppCompatActivity
                             //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                             Toast.makeText(chat_person.this, "success", Toast.LENGTH_SHORT).show();
                             message_edittext.setText("");
+                            messageAdapter.notifyDataSetChanged();
+
                             onStart();
                         }
                     })

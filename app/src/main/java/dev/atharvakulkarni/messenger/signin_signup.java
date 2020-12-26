@@ -275,6 +275,7 @@ public class signin_signup extends AppCompatActivity
         user.put("photo","photo");
         user.put("last seen",getCurrentDateTime());
         user.put("on_off_status", "Online");
+        user.put("userid",messageSenderId);
 
 
         // Add a new document with a generated ID
