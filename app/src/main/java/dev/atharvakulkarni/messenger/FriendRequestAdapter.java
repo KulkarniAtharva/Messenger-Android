@@ -1,6 +1,7 @@
 package dev.atharvakulkarni.messenger;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FriendRequestAdapter extends RecyclerView.Adapter
 {
@@ -21,6 +29,9 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
     ArrayList<String> photo = new ArrayList<>();
     // int flag;
     private ArrayList<Users_FriendRequest_Model>dataSet;
+    FirebaseFirestore db;
+    String messageSenderId;
+    private FirebaseAuth mAuth;
 
     public void update(ArrayList<Users_FriendRequest_Model> dataSet)
     {
@@ -65,6 +76,10 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        messageSenderId = mAuth.getCurrentUser().getUid();
+
         View view;
         switch (viewType)
         {
@@ -117,7 +132,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
         return dataSet.size();
     }
 
-    public static class UsersViewHolder extends RecyclerView.ViewHolder
+    public class UsersViewHolder extends RecyclerView.ViewHolder
     {
         TextView name;
 
@@ -125,6 +140,46 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
         {
             super(itemView);
             this.name = (TextView) itemView.findViewById(R.id.name);
+
+            itemView.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    int position = recyclerView.getChildLayoutPosition(view);
+                    Users_FriendRequest_Model object = dataSet.get(position);
+
+                    Toast.makeText(context, object.userid, Toast.LENGTH_SHORT).show();
+
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("name", messageSenderId);
+                    user.put("photo","photo");
+
+                    // Add a new document with a generated ID
+                    db.collection(messageSenderId).document("friend_requests").collection("friend_requests").document(object.userid).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
+                    {
+                        private static final String TAG = "a";
+
+                        @Override
+                        public void onSuccess(Void aVoid)
+                        {
+                            //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                           // Toast.makeText(context, "Friend Request sent to "+object.names, Toast.LENGTH_SHORT).show();
+
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener()
+                            {
+                                private static final String TAG = "b";
+
+                                @Override
+                                public void onFailure(@NonNull Exception e)
+                                {
+                                    Log.w(TAG, "Error adding document", e);
+                                }
+                            });
+                }
+            });
         }
     }
 

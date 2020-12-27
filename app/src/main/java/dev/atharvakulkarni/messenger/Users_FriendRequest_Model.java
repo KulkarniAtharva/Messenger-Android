@@ -6,12 +6,13 @@ public class Users_FriendRequest_Model
     public static final int FRIENDREQUEST_TYPE=1;
 
     public int type;
-    public String names,photo;
+    public String names,photo,userid;
 
-    public Users_FriendRequest_Model(int type, String names, String photo)
+    public Users_FriendRequest_Model(int type, String names, String photo, String userid)
     {
         this.type = type;
         this.names = names;
         this.photo = photo;
+        this.userid = userid;
     }
 }

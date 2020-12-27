@@ -202,7 +202,7 @@ public class signin_signup extends AppCompatActivity
                     }
                 });
 
-        Map<String, Object> user = new HashMap<>();
+      /*  Map<String, Object> user = new HashMap<>();
         user.put("name", name);
         user.put("userid", messageSenderId);
 
@@ -229,7 +229,7 @@ public class signin_signup extends AppCompatActivity
                     {
                         Log.w(TAG, "Error adding document", e);
                     }
-                });
+                });*/
 
 
 
@@ -276,7 +276,6 @@ public class signin_signup extends AppCompatActivity
         user.put("last seen",getCurrentDateTime());
         user.put("on_off_status", "Online");
         user.put("userid",messageSenderId);
-
 
         // Add a new document with a generated ID
         db.collection("users").document(signup_username.substring(0,signup_username.indexOf("@gmail.com"))).set(user).addOnSuccessListener(new OnSuccessListener<Void>()

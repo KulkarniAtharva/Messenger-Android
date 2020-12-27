@@ -41,7 +41,8 @@ public class Friends extends Fragment
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         friendsBinding = DataBindingUtil.inflate(inflater, R.layout.friends, container, false);
         View view = friendsBinding.getRoot();
 
@@ -73,11 +74,6 @@ public class Friends extends Fragment
         recyclerView.setLayoutManager(linearLayoutManager);
         myAdapter = new FriendsAdapter(recyclerView, getContext(), new ArrayList<String>(), new ArrayList<String>());
         recyclerView.setAdapter(myAdapter);
-
-
-
-
-
 
                 db.collection("users")
                 .get()
