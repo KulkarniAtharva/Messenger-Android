@@ -91,6 +91,40 @@ public class FriendRequest extends AppCompatActivity
 
                                 ((FriendRequestAdapter) recyclerView.getAdapter()).update(names,"pho",1);
                             }
+
+
+                            db.collection("users")
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                                    {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task)
+                                        {
+                                            if(task.isSuccessful())
+                                            {
+                                                for (QueryDocumentSnapshot document : task.getResult())
+                                                {
+                                                    Log.d("TAG1", document.getId() + " => " + document.getData());
+
+                                                    String names = document.getString("name");
+                                                    String photo = document.getString("photo");
+
+                                                    // Toast.makeText(getContext(), names.get(0), Toast.LENGTH_SHORT).show();
+                                                    //myAdapter.notifyDataSetChanged();
+
+
+
+                                                    ((FriendRequestAdapter) recyclerView.getAdapter()).update(names,photo,0);
+
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Log.d("TAG", "Error getting documents: ", task.getException());
+                                            }
+                                        }
+                                    });
                         }
                         else
                         {
@@ -99,39 +133,7 @@ public class FriendRequest extends AppCompatActivity
                     }
                 });
 
-        db.collection("users")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
-                {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task)
-                    {
-                        if(task.isSuccessful())
-                        {
-                            for (QueryDocumentSnapshot document : task.getResult())
-                            {
-                                 Log.d("TAG1", document.getId() + " => " + document.getData());
 
-                                String names = document.getString("name");
-                                String photo = document.getString("photo");
-
-                                // Toast.makeText(getContext(), names.get(0), Toast.LENGTH_SHORT).show();
-
-                                //myAdapter.notifyDataSetChanged();
-
-
-
-                                ((FriendRequestAdapter) recyclerView.getAdapter()).update(names,photo,0);
-
-
-                            }
-                        }
-                        else
-                        {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
 
 
 

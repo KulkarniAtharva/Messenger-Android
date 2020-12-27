@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,36 +57,11 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
-       /* String givendate = givendates.get(position);
-
-        int given_day = Integer.parseInt(givendate.substring(0,givendate.indexOf('/')));
-        int given_month = Integer.parseInt(givendate.substring(givendate.indexOf('/')+1,givendate.lastIndexOf('/')));
-        int given_year = Integer.parseInt(givendate.substring(givendate.lastIndexOf('/')+1));
-
-        int today_day =  Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        int today_month =  Calendar.getInstance().get(Calendar.MONTH)+1;
-        int today_year = Calendar.getInstance().get(Calendar.YEAR);
-
-        if(given_year == today_year && given_month == today_month)
-        {
-            if(today_day - given_day == 1)
-                givendate = "Yesterday";
-            else if(today_day == given_day)
-                givendate = "Today";
-        }
-
-
-        // initialize the elements of indiv,items
-        holder.filename.setText(title.get(position));
-        holder.givendate.setText(givendate);
-        // holder.duedate.setText(duedates.get(position));
-        // holder.teachername.setText(((usernames.get(position)).toUpperCase().charAt(0))+"");
-
-*/
         /*Glide.with(context)
                 .load(userphotouris.get(position))
                 .into(holder.circleImageView);*/
 
+        Toast.makeText(context, flag+"", Toast.LENGTH_SHORT).show();
 
         if(flag == 1)
         {
@@ -94,8 +70,8 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         }
         else
         {
-            holder.buttons2.setVisibility(View.VISIBLE);
             holder.buttons1.setVisibility(View.GONE);
+            holder.buttons2.setVisibility(View.VISIBLE);
         }
 
            holder.name.setText(name.get(position));
