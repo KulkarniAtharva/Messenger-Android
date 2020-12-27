@@ -50,7 +50,8 @@ public class chat_person extends AppCompatActivity
     private LinearLayoutManager linearLayoutManager;
     private final List<Messages1> messagesList = new ArrayList<>();
     private FirebaseAuth mAuth;
-    String messageSenderId;
+   // String messageSenderId;
+    UserModel userModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -66,7 +67,7 @@ public class chat_person extends AppCompatActivity
         // Access a Cloud Firestore instance from your Activity
         db = FirebaseFirestore.getInstance();
 
-        messageSenderId = mAuth.getCurrentUser().getUid();
+       // messageSenderId = mAuth.getCurrentUser().getUid();
 
         IntializeControllers();
 
@@ -98,6 +99,8 @@ public class chat_person extends AppCompatActivity
         userMessagesList.setLayoutManager(linearLayoutManager);
         userMessagesList.setAdapter(messageAdapter);
 
+        userModel = new UserModel();
+
 
         Calendar calendar = Calendar.getInstance();
 
@@ -126,13 +129,13 @@ public class chat_person extends AppCompatActivity
         {
             // Create a new user with a first and last name
             Map<String, Object> msg = new HashMap<>();
-            msg.put("from", messageSenderId);
+            msg.put("from", userModel.getUsername());
             msg.put("time", saveCurrentTime);
             msg.put("date", saveCurrentDate);
             msg.put("text", message);
 
             // Add a new document with a generated ID
-            db.collection(messageSenderId).document("person").collection("Adwait").document(String.valueOf(System.currentTimeMillis())).set(msg).addOnSuccessListener(new OnSuccessListener<Void>()
+            db.collection(userModel.getUsername()).document("person").collection("Adwait").document(String.valueOf(System.currentTimeMillis())).set(msg).addOnSuccessListener(new OnSuccessListener<Void>()
                     {
                         private static final String TAG = "a";
 
@@ -200,7 +203,7 @@ public class chat_person extends AppCompatActivity
             }
         });*/
 
-        db.collection(messageSenderId).document("person").collection("Adwait")
+        db.collection(userModel.getUsername()).document("person").collection("Adwait")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
                 {

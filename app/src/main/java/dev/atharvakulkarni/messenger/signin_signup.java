@@ -45,9 +45,9 @@ public class signin_signup extends AppCompatActivity
     SigninSignupBinding signinSignupBinding;
     // SignInSignUpViewModel signInSignUpViewModel;
     private FirebaseAuth mAuth;
-    String username,password,name,signup_username,signup_password,signup_reenterpassword;
+    String username,password,name,reenterpassword;
     FirebaseFirestore db;
-    private String saveCurrentTime, saveCurrentDate,messageSenderId;
+    private String saveCurrentTime, saveCurrentDate;//messageSenderId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -71,11 +71,13 @@ public class signin_signup extends AppCompatActivity
         db = FirebaseFirestore.getInstance();
 
         mAuth = FirebaseAuth.getInstance();
-        messageSenderId = mAuth.getCurrentUser().getUid();
+      //  messageSenderId = mAuth.getCurrentUser().getUid();
 
         getWindow().setStatusBarColor(getResources().getColor(R.color.white,getTheme()));
 
        // signInSignUpViewModel = new ViewModelProvider(this).get(SignInSignUpViewModel.class);
+
+        UserModel userModel = new UserModel();
 
         continue_btn.setOnClickListener(new View.OnClickListener()
         {
@@ -84,6 +86,10 @@ public class signin_signup extends AppCompatActivity
             {
                 username = signin_username_edittext.getText().toString()+"@gmail.com";
                 password = signin_password_edittext.getText().toString();
+
+                userModel.setUsername(signin_username_edittext.getText().toString());
+
+
 
                 loginUserAccount(username,password);
             }
@@ -95,12 +101,14 @@ public class signin_signup extends AppCompatActivity
             public void onClick(View view)
             {
                 name = name_edittext.getText().toString();
-                signup_username = signup_username_edittext.getText().toString()+"@gmail.com";
-                signup_password = signup_password_edittext.getText().toString();
-                signup_reenterpassword = signup_reenterpassword_edittext.getText().toString();
+                username = signup_username_edittext.getText().toString()+"@gmail.com";
+                password = signup_password_edittext.getText().toString();
+                reenterpassword = signup_reenterpassword_edittext.getText().toString();
 
-                if(signup_password.equals(signup_reenterpassword))
-                    signupUserAccount(name,signup_username,signup_password);
+                userModel.setUsername(signup_username_edittext.getText().toString());
+
+                if(password.equals(reenterpassword))
+                    signupUserAccount(name,username,password);
                 else
                     Toast.makeText(signin_signup.this, "Password did not match", Toast.LENGTH_SHORT).show();
             }
@@ -125,9 +133,6 @@ public class signin_signup extends AppCompatActivity
                 signup_page.setVisibility(View.VISIBLE);
             }
         });
-
-
-
     }
 
     private String getCurrentDateTime()
@@ -157,24 +162,19 @@ public class signin_signup extends AppCompatActivity
                    // FirebaseUser user = mAuth.getCurrentUser();
                     // updateUI(user);
 
-                    Toast.makeText(signin_signup.this, "Success", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(signin_signup.this, "Success"+, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(signin_signup.this,MainActivity.class);
                     startActivity(intent);
                 }
                 else
                 {
-                    // If sign in fails, display a message to the user.
                    // Log.w(TAG, "signInWithEmail:failure", task.getException());
                     Toast.makeText(signin_signup.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                     //updateUI(null);
                 }
             }
         });
-
-
-
-
     }
 
     private void signupUserAccount(String name,String username,String password)
@@ -195,7 +195,6 @@ public class signin_signup extends AppCompatActivity
                         }
                         else
                         {
-                            // If sign in fails, display a message to the user.
                           //  Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(signin_signup.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
@@ -275,10 +274,10 @@ public class signin_signup extends AppCompatActivity
         user.put("photo","photo");
         user.put("last seen",getCurrentDateTime());
         user.put("on_off_status", "Online");
-        user.put("userid",messageSenderId);
+       // user.put("userid",messageSenderId);
 
         // Add a new document with a generated ID
-        db.collection("users").document(signup_username.substring(0,signup_username.indexOf("@gmail.com"))).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
+        db.collection("users").document(username.substring(0,username.indexOf("@gmail.com"))).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
         {
             private static final String TAG = "a";
 
@@ -297,6 +296,29 @@ public class signin_signup extends AppCompatActivity
                     public void onFailure(@NonNull Exception e)
                     {
                         Log.w(TAG, "Error adding document", e);
+                    }
+                });
+
+
+
+        Map<String, Object> city = new HashMap<>();
+
+        db.collection(username.substring(0,username.indexOf("@gmail.com"))).document("person")
+                .set(city)
+                .addOnSuccessListener(new OnSuccessListener<Void>()
+                {
+                    @Override
+                    public void onSuccess(Void aVoid)
+                    {
+                        //Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener()
+                {
+                    @Override
+                    public void onFailure(@NonNull Exception e)
+                    {
+                      //  Log.w(TAG, "Error writing document", e);
                     }
                 });
     }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +39,7 @@ public class FriendRequest extends AppCompatActivity
     String messageSenderId;
     ArrayList<Users_FriendRequest_Model> list= new ArrayList();
     FriendRequestAdapter myAdapter;
+    UserModel userModel = new UserModel();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -55,6 +57,9 @@ public class FriendRequest extends AppCompatActivity
         messageSenderId = mAuth.getCurrentUser().getUid();
 
         recyclerView.setVisibility(View.VISIBLE);
+
+
+        Toast.makeText(this, userModel.getUsername(), Toast.LENGTH_SHORT).show();
 
         // recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
