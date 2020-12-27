@@ -36,6 +36,8 @@ public class FriendRequest extends AppCompatActivity
     FirebaseFirestore db;
     private FirebaseAuth mAuth;
     String messageSenderId;
+    ArrayList<Users_FriendRequest_Model> list= new ArrayList();
+    FriendRequestAdapter myAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -62,10 +64,11 @@ public class FriendRequest extends AppCompatActivity
        // linearLayoutManager.setReverseLayout(true);
        // linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+        myAdapter = new FriendRequestAdapter(recyclerView,FriendRequest.this,list);
+        recyclerView.setAdapter(myAdapter);
 
         // recyclerView.setLayoutManager(new LinearLayoutManager(download.this));
-        FriendRequestAdapter myAdapter = new FriendRequestAdapter(recyclerView,this,new ArrayList<String>(),new ArrayList<String>());
-        recyclerView.setAdapter(myAdapter);
+
 
         db.collection(messageSenderId).document("friend_requests").collection("friend_requests")
                 .get()
@@ -83,15 +86,14 @@ public class FriendRequest extends AppCompatActivity
                                 String names = document.getString("name");
                                 String photo = document.getString("photo");
 
-                                // Toast.makeText(getContext(), names.get(0), Toast.LENGTH_SHORT).show();
+                                Users_FriendRequest_Model model = new Users_FriendRequest_Model(Users_FriendRequest_Model.FRIENDREQUEST_TYPE,names,photo);
+                                list.add(model);
 
-                                // myAdapter.notifyDataSetChanged();
+                                myAdapter.notifyDataSetChanged();
+                                // ((FriendRequestAdapter) recyclerView.getAdapter()).update(names,photo,0);
 
-
-
-                                ((FriendRequestAdapter) recyclerView.getAdapter()).update(names,"pho",1);
+                              //  FriendRequestAdapter myAdapter = new FriendRequestAdapter(recyclerView,FriendRequest.this,list);
                             }
-
 
                             db.collection("users")
                                     .get()
@@ -109,14 +111,15 @@ public class FriendRequest extends AppCompatActivity
                                                     String names = document.getString("name");
                                                     String photo = document.getString("photo");
 
-                                                    // Toast.makeText(getContext(), names.get(0), Toast.LENGTH_SHORT).show();
-                                                    //myAdapter.notifyDataSetChanged();
 
 
+                                                    Users_FriendRequest_Model model = new Users_FriendRequest_Model(Users_FriendRequest_Model.USERS_TYPE,names,photo);
+                                                    list.add(model);
 
-                                                    ((FriendRequestAdapter) recyclerView.getAdapter()).update(names,photo,0);
+                                                    myAdapter.notifyDataSetChanged();
+                                                   // ((FriendRequestAdapter) recyclerView.getAdapter()).update(list);
 
-
+                                                   // FriendRequestAdapter myAdapter = new FriendRequestAdapter(recyclerView,FriendRequest.this,list);
                                                 }
                                             }
                                             else
@@ -137,5 +140,18 @@ public class FriendRequest extends AppCompatActivity
 
 
 
+
     }
+
+    /*@Override
+    protected void onStart()
+    {
+        super.onStart();
+        myAdapter.sta;
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }*/
 }

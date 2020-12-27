@@ -13,23 +13,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdapter.ViewHolder>
+public class FriendRequestAdapter extends RecyclerView.Adapter
 {
     RecyclerView recyclerView;
     Context context;
-    ArrayList<String> name = new ArrayList<>();
+   // ArrayList<String> name = new ArrayList<>();
     ArrayList<String> photo = new ArrayList<>();
-    int flag;
+    // int flag;
+    private ArrayList<Users_FriendRequest_Model>dataSet;
 
-    public void update(String name,String photo,int flag)
+    public void update(ArrayList<Users_FriendRequest_Model> dataSet)
     {
-        this.name.add(name);
-        this.photo.add(photo);
-        this.flag = flag;
-        /*duedates.add(due_date);
-        givendates.add(given_date);
-        description.add(des);
-        userphotouris.add(userphotoUri);*/
+        this.dataSet = dataSet;
+
+       // this.flag = flag;
 
         //if(getItemCount() == 0)
         //    Toast.makeText(context, "No Results Found", Toast.LENGTH_SHORT).show();
@@ -38,72 +35,109 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         // Toast.makeText(context, getItemCount()+"", Toast.LENGTH_SHORT).show();
     }
 
-    public FriendRequestAdapter(RecyclerView recyclerView,Context context,ArrayList<String> name,ArrayList<String> photo)
+    public FriendRequestAdapter(RecyclerView recyclerView,Context context,ArrayList<Users_FriendRequest_Model>data)
     {
         this.recyclerView = recyclerView;
         this.context = context;
-        this.name = name;
-        this.photo = photo;
+        this.dataSet = data;
     }
 
-    @NonNull
+   /* @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)   // to create view for recycler view item
     {
         View view = LayoutInflater.from(context).inflate(R.layout.friend_request_item,parent,false);
         return new ViewHolder(view);
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
         /*Glide.with(context)
                 .load(userphotouris.get(position))
                 .into(holder.circleImageView);*/
 
-        Toast.makeText(context, flag+"", Toast.LENGTH_SHORT).show();
-
-        if(flag == 1)
-        {
-            holder.buttons2.setVisibility(View.GONE);
-            holder.buttons1.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            holder.buttons1.setVisibility(View.GONE);
-            holder.buttons2.setVisibility(View.VISIBLE);
-        }
-
-           holder.name.setText(name.get(position));
+      /*     holder.name.setText(name.get(position));
            holder.photo.setText(photo.get(position));
         //  holder.count.setText(count.get(position));
+    }*/
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
+        View view;
+        switch (viewType)
+        {
+            case Users_FriendRequest_Model.USERS_TYPE:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_item, parent, false);
+                return new UsersViewHolder(view);
+            case Users_FriendRequest_Model.FRIENDREQUEST_TYPE:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.friend_request_item, parent, false);
+                return new FriendRequestViewHolder(view);
+        }
+        return null;
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        switch (dataSet.get(position).type)
+        {
+            case 0:
+                return Users_FriendRequest_Model.USERS_TYPE;
+            case 1:
+                return Users_FriendRequest_Model.FRIENDREQUEST_TYPE;
+            default:
+                return -1;
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int listPosition)
+    {
+        Users_FriendRequest_Model object = dataSet.get(listPosition);
+        if (object != null)
+        {
+            switch (object.type)
+            {
+                case Users_FriendRequest_Model.USERS_TYPE:
+                    ((UsersViewHolder) holder).name.setText(object.names);
+
+                    break;
+                case Users_FriendRequest_Model.FRIENDREQUEST_TYPE:
+                    ((FriendRequestViewHolder) holder).name.setText(object.names);
+                    break;
+            }
+        }
     }
 
     @Override
     public int getItemCount()       // return the no. of items
     {
-        return name.size();
+        return dataSet.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
+    public static class UsersViewHolder extends RecyclerView.ViewHolder
     {
-        TextView name,photo;
-        RelativeLayout buttons1,buttons2;
+        TextView name;
 
-        public ViewHolder(View itemView)        // represents indiv list items
+        public UsersViewHolder(View itemView)
         {
             super(itemView);
-           /* filename = itemView.findViewById(R.id.nameofFile);
-            givendate = itemView.findViewById(R.id.givend);
-            //duedate = itemView.findViewById(R.id.dued);
-            teachername = itemView.findViewById(R.id.initial);
-            circleImageView = itemView.findViewById(R.id.user_photo);*/
+            this.name = (TextView) itemView.findViewById(R.id.name);
+        }
+    }
+
+    public class FriendRequestViewHolder extends RecyclerView.ViewHolder
+    {
+        TextView name,photo;
+
+        public FriendRequestViewHolder(View itemView)        // represents indiv list items
+        {
+            super(itemView);
 
             name = itemView.findViewById(R.id.name);
             photo = itemView.findViewById(R.id.photo);
-            buttons1 = itemView.findViewById(R.id.buttons1);
-            buttons2 = itemView.findViewById(R.id.buttons2);
-
 
             itemView.setOnClickListener(new View.OnClickListener()
             {
