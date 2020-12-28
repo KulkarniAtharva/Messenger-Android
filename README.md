@@ -57,5 +57,6 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - MVVM Architecture
 - RxJava
 - RecyclerView
+- Picasso/Glide
 
 ## Future Additions
