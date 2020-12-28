@@ -30,8 +30,10 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
     // int flag;
     private ArrayList<Users_FriendRequest_Model>dataSet;
     FirebaseFirestore db;
-    String messageSenderId;
+   // String messageSenderId;
+    String login_username;
     private FirebaseAuth mAuth;
+    UserModel userModel;
 
     public void update(ArrayList<Users_FriendRequest_Model> dataSet)
     {
@@ -78,7 +80,10 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
     {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        messageSenderId = mAuth.getCurrentUser().getUid();
+      //  messageSenderId = mAuth.getCurrentUser().getUid();
+
+        userModel = new UserModel();
+        login_username = userModel.getUsername();
 
         View view;
         switch (viewType)
@@ -152,11 +157,11 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
                     Toast.makeText(context, object.userid, Toast.LENGTH_SHORT).show();
 
                     Map<String, Object> user = new HashMap<>();
-                    user.put("name", messageSenderId);
+                    user.put("name", login_username);
                     user.put("photo","photo");
 
                     // Add a new document with a generated ID
-                    db.collection(messageSenderId).document("friend_requests").collection("friend_requests").document(object.userid).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
+                    db.collection(object.names).document("friend_requests").collection("friend_requests").document(object.userid).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
                     {
                         private static final String TAG = "a";
 

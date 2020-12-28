@@ -6,14 +6,17 @@ public class UserModel
 {
     private static String Username;
 
-    public UserModel() {
+    public UserModel()
+    {
     }
 
-    public String getUsername() {
+    public String getUsername()
+    {
         return Username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(String username)
+    {
         Username = username;
     }
 }
