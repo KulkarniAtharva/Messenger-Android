@@ -122,10 +122,18 @@ public class FriendRequest extends AppCompatActivity
 
                                                     Users_FriendRequest_Model model = new Users_FriendRequest_Model(Users_FriendRequest_Model.USERS_TYPE,names,photo,document.getId());
 
-                                                    for(String temp : temp)
+                                                    if(temp.isEmpty())
                                                     {
-                                                        if(!(UserModel.getUsername().equals(document.getId())) && !(temp.equals(document.getId())))
+                                                        if (!(UserModel.getUsername().equals(document.getId())))
                                                             list.add(model);
+                                                    }
+                                                    else
+                                                    {
+                                                        for (String temp : temp)
+                                                        {
+                                                            if (!(UserModel.getUsername().equals(document.getId())) && !(temp.equals(document.getId())))
+                                                                list.add(model);
+                                                        }
                                                     }
 
 

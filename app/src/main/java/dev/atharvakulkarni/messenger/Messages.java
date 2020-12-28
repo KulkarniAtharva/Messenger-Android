@@ -1,86 +1,57 @@
 package dev.atharvakulkarni.messenger;
 
-public class Messages {
-    private String from, message, type, to, messageID, time, date, name;
+public class Messages
+{
+    private String date, from, text, time;
 
     public Messages()
     {
 
     }
 
-    public Messages(String from, String message, String type, String to, String messageID, String time, String date, String name)
+    public Messages(String date, String from, String text, String time)
     {
-        this.from = from;
-        this.message = message;
-        this.type = type;
-        this.to = to;
-        this.messageID = messageID;
-        this.time = time;
         this.date = date;
-        this.name = name;
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
         this.from = from;
+        this.text = text;
+        this.time = time;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    public String getMessageID() {
-        return messageID;
-    }
-
-    public void setMessageID(String messageID) {
-        this.messageID = messageID;
-    }
-
-    public String getTime() {
+   public String getTime()
+   {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(String time)
+    {
         this.time = time;
     }
 
-    public String getDate() {
+    public String getDate()
+    {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(String date)
+    {
         this.date = date;
     }
 
-    public String getName() {
-        return name;
+    public String getFrom()
+    {
+        return from;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFrom(String from)
+    {
+        this.from = from;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

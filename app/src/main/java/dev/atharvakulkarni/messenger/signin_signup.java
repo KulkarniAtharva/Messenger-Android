@@ -106,6 +106,8 @@ public class signin_signup extends AppCompatActivity
 
                 UserModel.setUsername(signup_username_edittext.getText().toString());
 
+                UserProfile.user();
+
                 if(password.equals(reenterpassword))
                     signupUserAccount(name,username,password);
                 else

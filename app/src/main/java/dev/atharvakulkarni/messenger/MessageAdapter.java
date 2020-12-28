@@ -1,46 +1,30 @@
 package dev.atharvakulkarni.messenger;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder>
 {
-    private List<Messages1> userMessagesList;
+    private List<Messages> userMessagesList;
     private FirebaseAuth mAuth;
    // private DatabaseReference usersRef;
     Context context;
 
     FirebaseFirestore db;
 
-    public MessageAdapter(List<Messages1> userMessagesList,Context context)
+    public MessageAdapter(List<Messages> userMessagesList, Context context)
     {
         this.userMessagesList = userMessagesList;
         this.context = context;
@@ -78,7 +62,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public void onBindViewHolder(@NonNull final MessageViewHolder messageViewHolder, final int position)
     {
         String messageSenderId = mAuth.getCurrentUser().getUid();
-        Messages1 messages = userMessagesList.get(position);
+        Messages messages = userMessagesList.get(position);
 
       //  messageViewHolder.senderMessageText.setText(messages.getText());
 

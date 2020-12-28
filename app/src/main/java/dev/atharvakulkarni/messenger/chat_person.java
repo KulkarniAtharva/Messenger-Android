@@ -3,18 +3,14 @@ package dev.atharvakulkarni.messenger;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,10 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -48,7 +42,7 @@ public class chat_person extends AppCompatActivity
     private MessageAdapter messageAdapter;
     private RecyclerView userMessagesList;
     private LinearLayoutManager linearLayoutManager;
-    private final List<Messages1> messagesList = new ArrayList<>();
+    private final List<Messages> messagesList = new ArrayList<>();
     private FirebaseAuth mAuth;
    // String messageSenderId;
     UserModel userModel;
@@ -216,7 +210,7 @@ public class chat_person extends AppCompatActivity
                             {
                                // Log.d(TAG, document.getId() + " => " + document.getData());
 
-                                Messages1 messages = document.toObject(Messages1.class);
+                                Messages messages = document.toObject(Messages.class);
                                 messagesList.add(messages);
                                 messageAdapter.notifyDataSetChanged();
                                 userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
