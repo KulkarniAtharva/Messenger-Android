@@ -33,9 +33,7 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - User status
 - Full chat history
 - Send/receive chat messages
-- Sent status
-- Delivered status
-- Read status
+- Delivered-Sent-Read status
 - 'is typing' status
 - Global search
 - Unread messages count
@@ -44,6 +42,7 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - Chat notifications
 - Attachments
 - Online/ Offline & Last Seen 
+- Sending Friend Request
 
 
 ## Built With
