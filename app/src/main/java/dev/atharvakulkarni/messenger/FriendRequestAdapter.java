@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
     private ArrayList<Users_FriendRequest_Model>dataSet;
     FirebaseFirestore db;
    // String messageSenderId;
-    String login_username;
+
     private FirebaseAuth mAuth;
 
     public void update(ArrayList<Users_FriendRequest_Model> dataSet)
@@ -81,7 +82,6 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
         mAuth = FirebaseAuth.getInstance();
       //  messageSenderId = mAuth.getCurrentUser().getUid();
 
-        login_username = UserModel.getUsername();
 
         View view;
         switch (viewType)
@@ -159,7 +159,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
                     user.put("photo","photo");
 
                     // Add a new document with a generated ID
-                    db.collection(object.username).document("friend_requests").collection("friend_requests").document(login_username).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
+                    db.collection(object.username).document("friend_requests").collection("friend_requests").document(UserModel.getUsername()).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
                     {
                         private static final String TAG = "a";
 
@@ -189,6 +189,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
     public class FriendRequestViewHolder extends RecyclerView.ViewHolder
     {
         TextView name,photo;
+        Button accept,cancel;
 
         public FriendRequestViewHolder(View itemView)        // represents indiv list items
         {
@@ -196,35 +197,48 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
 
             name = itemView.findViewById(R.id.name);
             photo = itemView.findViewById(R.id.photo);
+            accept = itemView.findViewById(R.id.accept_request);
+            cancel = itemView.findViewById(R.id.cancel_request);
 
-            itemView.setOnClickListener(new View.OnClickListener()
+            accept.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View view)
                 {
                     int position = recyclerView.getChildLayoutPosition(view);
+                    Users_FriendRequest_Model object = dataSet.get(position);
 
-                   /* Intent intent = new Intent(context, download_each.class);
-                    intent.putExtra("title",title.get(position));
-                    intent.putExtra("description",description.get(position));
-                    intent.putExtra("duedate",duedates.get(position));
-                    intent.putExtra("givendate",givendates.get(position));
-                    intent.putExtra("teachername",usernames.get(position));
-                    intent.putExtra("url",urls.get(position));
-                    intent.putExtra("position",position);
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("name", object.names);
+                    user.put("photo",object.photo);
 
-                    context.startActivity(intent);*/
+                    // Add a new document with a generated ID
+                    db.collection(UserModel.getUsername()).document("friends").collection("friends").document(object.username).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
+                    {
+                        @Override
+                        public void onSuccess(Void aVoid)
+                        {
+                            //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                             Toast.makeText(context, "Friend Request sent to "+object.username, Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener()
+                            {
+                                @Override
+                                public void onFailure(@NonNull Exception e)
+                                {
+                                    Log.w("b", "Error adding document", e);
+                                }
+                            });
+                }
+            });
 
-                  //  Intent intent = new Intent(context,chat_person.class);
-                  //  context.startActivity(intent);
+            cancel.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
 
-
-                    // denotes that we are going to view something
-                    // intent.setData(Uri.parse(urls.get(position)));
-                    //intent.setType(Intent.ACTION_VIEW);
-
-                   /* intent.setDataAndType(Uri.parse((urls.get(position))),Intent.ACTION_VIEW);
-                    context.startActivity(intent);*/
                 }
             });
         }

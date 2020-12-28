@@ -39,7 +39,6 @@ public class FriendRequest extends AppCompatActivity
     String messageSenderId;
     ArrayList<Users_FriendRequest_Model> list= new ArrayList();
     FriendRequestAdapter myAdapter;
-    UserModel userModel = new UserModel();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -59,7 +58,7 @@ public class FriendRequest extends AppCompatActivity
         recyclerView.setVisibility(View.VISIBLE);
 
 
-        Toast.makeText(this, userModel.getUsername(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, UserModel.getUsername(), Toast.LENGTH_SHORT).show();
 
         // recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
@@ -74,10 +73,8 @@ public class FriendRequest extends AppCompatActivity
 
         // recyclerView.setLayoutManager(new LinearLayoutManager(download.this));
 
-        UserModel userModel = new UserModel();
 
-
-        db.collection(userModel.getUsername()).document("friend_requests").collection("friend_requests")
+        db.collection(UserModel.getUsername()).document("friend_requests").collection("friend_requests")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
                 {
@@ -120,7 +117,7 @@ public class FriendRequest extends AppCompatActivity
 
                                                     Users_FriendRequest_Model model = new Users_FriendRequest_Model(Users_FriendRequest_Model.USERS_TYPE,names,photo,document.getId());
 
-                                                    if(!(userModel.getUsername().equals(document.getId())))
+                                                    if(!(UserModel.getUsername().equals(document.getId())))
                                                         list.add(model);
 
                                                     myAdapter.notifyDataSetChanged();
