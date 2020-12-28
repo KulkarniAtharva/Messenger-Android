@@ -205,21 +205,44 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
                 @Override
                 public void onClick(View view)
                 {
-                    int position = recyclerView.getChildLayoutPosition(view);
+                    int position = recyclerView.getChildLayoutPosition(itemView);
                     Users_FriendRequest_Model object = dataSet.get(position);
 
-                    Map<String, Object> user = new HashMap<>();
-                    user.put("name", object.names);
-                    user.put("photo",object.photo);
+                    Map<String, Object> user1 = new HashMap<>();
+                    user1.put("name", object.names);
+                    user1.put("photo",object.photo);
 
                     // Add a new document with a generated ID
-                    db.collection(UserModel.getUsername()).document("friends").collection("friends").document(object.username).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
+                    db.collection(UserModel.getUsername()).document("friends").collection("friends").document(object.username).set(user1).addOnSuccessListener(new OnSuccessListener<Void>()
                     {
                         @Override
                         public void onSuccess(Void aVoid)
                         {
                             //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                             Toast.makeText(context, "Friend Request sent to "+object.username, Toast.LENGTH_SHORT).show();
+                             Toast.makeText(context, "Friend Request accepted of "+object.username, Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener()
+                            {
+                                @Override
+                                public void onFailure(@NonNull Exception e)
+                                {
+                                    Log.w("b", "Error adding document", e);
+                                }
+                            });
+
+                    Map<String, Object> user2 = new HashMap<>();
+                    user2.put("name", UserModel.getName());
+                    user2.put("photo",UserModel.getPhoto());
+
+
+                    db.collection(object.username).document("friends").collection("friends").document(UserModel.getUsername()).set(user2).addOnSuccessListener(new OnSuccessListener<Void>()
+                    {
+                        @Override
+                        public void onSuccess(Void aVoid)
+                        {
+                            //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            Toast.makeText(context, "Friend Request accepted of "+object.username, Toast.LENGTH_SHORT).show();
                         }
                     })
                             .addOnFailureListener(new OnFailureListener()

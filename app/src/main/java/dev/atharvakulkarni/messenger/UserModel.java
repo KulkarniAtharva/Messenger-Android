@@ -40,7 +40,7 @@ public class UserModel
         UserModel.name = name;
     }
 
-    public String getPhoto()
+    public static String getPhoto()
     {
         return photo;
     }

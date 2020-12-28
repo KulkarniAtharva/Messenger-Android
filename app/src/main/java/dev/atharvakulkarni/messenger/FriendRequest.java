@@ -24,6 +24,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dev.atharvakulkarni.messenger.databinding.ChatsBinding;
 import dev.atharvakulkarni.messenger.databinding.FriendRequestBinding;
@@ -73,6 +74,8 @@ public class FriendRequest extends AppCompatActivity
 
         // recyclerView.setLayoutManager(new LinearLayoutManager(download.this));
 
+        List<String> temp = new ArrayList<>();
+
 
         db.collection(UserModel.getUsername()).document("friend_requests").collection("friend_requests")
                 .get()
@@ -85,7 +88,9 @@ public class FriendRequest extends AppCompatActivity
                         {
                             for (QueryDocumentSnapshot document : task.getResult())
                             {
-                                 Log.d("TAG", document.getId() + " => " + document.getData());
+                                Log.d("TAG", document.getId() + " => " + document.getData());
+
+                                temp.add(document.getId());
 
                                 String names = document.getString("name");
                                 String photo = document.getString("photo");
@@ -117,8 +122,14 @@ public class FriendRequest extends AppCompatActivity
 
                                                     Users_FriendRequest_Model model = new Users_FriendRequest_Model(Users_FriendRequest_Model.USERS_TYPE,names,photo,document.getId());
 
-                                                    if(!(UserModel.getUsername().equals(document.getId())))
-                                                        list.add(model);
+                                                    for(String temp : temp)
+                                                    {
+                                                        if(!(UserModel.getUsername().equals(document.getId())) && !(temp.equals(document.getId())))
+                                                            list.add(model);
+                                                    }
+
+
+
 
                                                     myAdapter.notifyDataSetChanged();
                                                    // ((FriendRequestAdapter) recyclerView.getAdapter()).update(list);
