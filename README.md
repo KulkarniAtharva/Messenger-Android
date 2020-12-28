@@ -2,7 +2,7 @@
 
 <B>Part 1 - [Flutter Mobile App]()    <BR>
    Part 2 - [Flutter Web App]()     <BR>
-   Part 3 - [Android App]()  - Currently viewing    <BR>
+   Part 3 - [Android App]()  - currently viewing    <BR>
    Part 4 - [Web App using ReactJS & Firebase]()    <BR>
    Part 5 - [Web App using Django & PostgreSQL]()   <BR>
    Part 6 - [One-PC-Facebook  using C++ & File Handling]()  <BR><BR><BR>
