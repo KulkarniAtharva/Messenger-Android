@@ -1,8 +1,12 @@
-# Messenger - Android
+# <div align="center">Messenger - Android</div>
 
 <B>Part 1 - [Flutter Mobile App]()    <BR>
-   Part 2 - [Flutter Web App]()     <BR><BR><BR>
-   <H3> Part 3 - Android App       </H3>   <BR><BR><BR>
+   Part 2 - [Flutter Web App]()     <BR>
+   Part 3 - [Android App]()  - currently viewing    <BR>
+   Part 4 - [Web App using ReactJS & Firebase]()    <BR>
+   Part 5 - [Web App using Django & PostgreSQL]()   <BR>
+   Part 6 - [One-PC-Facebook  using C++ & File Handling]()  <BR><BR><BR>
+   <H3> <div align="center">Part 3 - Android App</div>       </H3>   <BR><BR><BR>
 </B>
 
 Android Chat Application developed using Android Studio & Firebase.
@@ -11,6 +15,12 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 
 
 ## 📸 Screenshots
+
+
+
+## 🔥 Firebase Screenshots
+
+
 
 
 ## Features
@@ -48,3 +58,5 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - MVVM Architecture
 - RxJava
 - RecyclerView
+
+## Future Additions
