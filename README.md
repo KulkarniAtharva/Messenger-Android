@@ -1,4 +1,4 @@
-# Messenger - Android
+# <div align="center">Messenger - Android</div>
 
 <B>Part 1 - [Flutter Mobile App]()    <BR>
    Part 2 - [Flutter Web App]()     <BR><BR><BR>
