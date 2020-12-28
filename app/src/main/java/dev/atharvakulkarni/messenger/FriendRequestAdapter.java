@@ -33,7 +33,6 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
    // String messageSenderId;
     String login_username;
     private FirebaseAuth mAuth;
-    UserModel userModel;
 
     public void update(ArrayList<Users_FriendRequest_Model> dataSet)
     {
@@ -82,8 +81,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
         mAuth = FirebaseAuth.getInstance();
       //  messageSenderId = mAuth.getCurrentUser().getUid();
 
-        userModel = new UserModel();
-        login_username = userModel.getUsername();
+        login_username = UserModel.getUsername();
 
         View view;
         switch (viewType)
@@ -157,7 +155,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
                     Toast.makeText(context, object.username, Toast.LENGTH_SHORT).show();
 
                     Map<String, Object> user = new HashMap<>();
-                    user.put("name", userModel.getName());
+                    user.put("name", UserModel.getName());
                     user.put("photo","photo");
 
                     // Add a new document with a generated ID

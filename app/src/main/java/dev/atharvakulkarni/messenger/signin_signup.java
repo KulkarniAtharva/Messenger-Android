@@ -28,6 +28,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.auth.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -77,8 +78,6 @@ public class signin_signup extends AppCompatActivity
 
        // signInSignUpViewModel = new ViewModelProvider(this).get(SignInSignUpViewModel.class);
 
-        UserModel userModel = new UserModel();
-
         continue_btn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -87,9 +86,9 @@ public class signin_signup extends AppCompatActivity
                 username = signin_username_edittext.getText().toString()+"@gmail.com";
                 password = signin_password_edittext.getText().toString();
 
-                userModel.setUsername(signin_username_edittext.getText().toString());
-                userModel.setName(signin_username_edittext.getText().toString());
+                UserModel.setUsername(signin_username_edittext.getText().toString());
 
+                UserProfile.user();
 
                 loginUserAccount(username,password);
             }
@@ -105,7 +104,7 @@ public class signin_signup extends AppCompatActivity
                 password = signup_password_edittext.getText().toString();
                 reenterpassword = signup_reenterpassword_edittext.getText().toString();
 
-                userModel.setUsername(signup_username_edittext.getText().toString());
+                UserModel.setUsername(signup_username_edittext.getText().toString());
 
                 if(password.equals(reenterpassword))
                     signupUserAccount(name,username,password);
@@ -272,7 +271,7 @@ public class signin_signup extends AppCompatActivity
         user.put("name", name);
         user.put("status","Good Morning");
         user.put("photo","photo");
-        user.put("last seen",getCurrentDateTime());
+        user.put("last_seen",getCurrentDateTime());
         user.put("on_off_status", "Online");
        // user.put("userid",messageSenderId);
 
