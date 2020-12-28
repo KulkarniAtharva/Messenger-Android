@@ -43,6 +43,9 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - Attachments
 - Online/ Offline & Last Seen 
 - Sending Friend Request
+- Calling Feature
+- Offline support enabled
+- QR Scanner Connect Friend
 
 
 ## Built With
