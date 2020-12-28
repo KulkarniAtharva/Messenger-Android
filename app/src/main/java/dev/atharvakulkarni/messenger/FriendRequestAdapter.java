@@ -238,7 +238,27 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
                 @Override
                 public void onClick(View view)
                 {
+                    int position = recyclerView.getChildLayoutPosition(view);
+                    Users_FriendRequest_Model object = dataSet.get(position);
 
+                    db.collection(UserModel.getUsername()).document("friend_requests").collection("friend_requests").document(object.username)
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>()
+                            {
+                                @Override
+                                public void onSuccess(Void aVoid)
+                                {
+                                    Log.d("TAG", "DocumentSnapshot successfully deleted!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener()
+                            {
+                                @Override
+                                public void onFailure(@NonNull Exception e)
+                                {
+                                    Log.w("TAG", "Error deleting document", e);
+                                }
+                            });
                 }
             });
         }
