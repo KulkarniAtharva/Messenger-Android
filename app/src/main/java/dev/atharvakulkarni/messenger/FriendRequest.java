@@ -74,8 +74,10 @@ public class FriendRequest extends AppCompatActivity
 
         // recyclerView.setLayoutManager(new LinearLayoutManager(download.this));
 
+        UserModel userModel = new UserModel();
 
-        db.collection(messageSenderId).document("friend_requests").collection("friend_requests")
+
+        db.collection(userModel.getUsername()).document("friend_requests").collection("friend_requests")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
                 {
@@ -91,7 +93,7 @@ public class FriendRequest extends AppCompatActivity
                                 String names = document.getString("name");
                                 String photo = document.getString("photo");
 
-                                Users_FriendRequest_Model model = new Users_FriendRequest_Model(Users_FriendRequest_Model.FRIENDREQUEST_TYPE,names,photo,"s");
+                                Users_FriendRequest_Model model = new Users_FriendRequest_Model(Users_FriendRequest_Model.FRIENDREQUEST_TYPE,names,photo,document.getId());
                                 list.add(model);
 
                                 myAdapter.notifyDataSetChanged();
@@ -117,7 +119,9 @@ public class FriendRequest extends AppCompatActivity
                                                     String photo = document.getString("photo");
 
                                                     Users_FriendRequest_Model model = new Users_FriendRequest_Model(Users_FriendRequest_Model.USERS_TYPE,names,photo,document.getId());
-                                                    list.add(model);
+
+                                                    if(!(userModel.getUsername().equals(document.getId())))
+                                                        list.add(model);
 
                                                     myAdapter.notifyDataSetChanged();
                                                    // ((FriendRequestAdapter) recyclerView.getAdapter()).update(list);

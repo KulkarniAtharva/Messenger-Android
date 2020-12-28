@@ -88,7 +88,7 @@ public class signin_signup extends AppCompatActivity
                 password = signin_password_edittext.getText().toString();
 
                 userModel.setUsername(signin_username_edittext.getText().toString());
-
+                userModel.setName(signin_username_edittext.getText().toString());
 
 
                 loginUserAccount(username,password);

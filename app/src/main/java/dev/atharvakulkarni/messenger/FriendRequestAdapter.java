@@ -154,14 +154,14 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
                     int position = recyclerView.getChildLayoutPosition(view);
                     Users_FriendRequest_Model object = dataSet.get(position);
 
-                    Toast.makeText(context, object.userid, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, object.username, Toast.LENGTH_SHORT).show();
 
                     Map<String, Object> user = new HashMap<>();
-                    user.put("name", login_username);
+                    user.put("name", userModel.getName());
                     user.put("photo","photo");
 
                     // Add a new document with a generated ID
-                    db.collection(object.names).document("friend_requests").collection("friend_requests").document(object.userid).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
+                    db.collection(object.username).document("friend_requests").collection("friend_requests").document(login_username).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
                     {
                         private static final String TAG = "a";
 
