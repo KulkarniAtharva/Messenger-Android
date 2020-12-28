@@ -6,7 +6,7 @@
    Part 4 - [Web App using ReactJS & Firebase]()    <BR>
    Part 5 - [Web App using Django & PostgreSQL]()   <BR>
    Part 6 - [One-PC-Facebook  using C++ & File Handling]()  <BR><BR><BR>
-   <H3> Part 3 - Android App       </H3>   <BR><BR><BR>
+   <H3> <div align="center">Part 3 - Android App</div>       </H3>   <BR><BR><BR>
 </B>
 
 Android Chat Application developed using Android Studio & Firebase.
@@ -59,4 +59,4 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - RxJava
 - RecyclerView
 
-## Further Additions
+## Future Additions
