@@ -63,8 +63,7 @@ public class FriendRequest extends AppCompatActivity
 
         // recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
-        // custom adapters always
-        // populate the recycler view with items
+        // custom adapters always populate the recycler view with items
         linearLayoutManager = new LinearLayoutManager(this);
        // linearLayoutManager.setReverseLayout(true);
        // linearLayoutManager.setStackFromEnd(true);

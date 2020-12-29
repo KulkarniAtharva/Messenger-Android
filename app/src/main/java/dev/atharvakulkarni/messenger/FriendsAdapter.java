@@ -2,6 +2,7 @@ package dev.atharvakulkarni.messenger;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -19,15 +26,16 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
 {
     RecyclerView recyclerView;
     Context context;
-    ArrayList<String> name = new ArrayList<>();
-    ArrayList<String> photo = new ArrayList<>();
-    ArrayList<String> username = new ArrayList<>();
+    ArrayList<String> names = new ArrayList<>();
+    ArrayList<String> photos = new ArrayList<>();
+    ArrayList<String> usernames = new ArrayList<>();
+    FirebaseFirestore db;
 
    public void update(String name, String photo,String username)
     {
-        this.name.add(name);
-        this.photo.add(photo);
-        this.username.add(username);
+        this.names.add(name);
+        this.photos.add(photo);
+        this.usernames.add(username);
 
         if(getItemCount() == 0)
            Toast.makeText(context, "No Results Found", Toast.LENGTH_SHORT).show();
@@ -39,9 +47,9 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
     {
         this.recyclerView = recyclerView;
         this.context = context;
-        this.name = name;
-        this.photo = photo;
-        this.username = username;
+        this.names = name;
+        this.photos = photo;
+        this.usernames = username;
     }
 
     @NonNull
@@ -49,6 +57,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)   // to create view for recycler view item
     {
         View view = LayoutInflater.from(context).inflate(R.layout.friends_item,parent,false);
+        db = FirebaseFirestore.getInstance();
 
         return new ViewHolder(view);
     }
@@ -60,14 +69,14 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
                 .load(userphotouris.get(position))
                 .into(holder.circleImageView);*/
 
-        holder.name.setText(name.get(position));
-        holder.photo.setText(photo.get(position));
+        holder.name.setText(names.get(position));
+        holder.photo.setText(photos.get(position));
     }
 
     @Override
     public int getItemCount()       // return the no. of items
     {
-        return name.size();
+        return names.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
@@ -100,11 +109,32 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
                     context.startActivity(intent);*/
 
 
-                    
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("name", UserModel.getUsername());
+                    user.put("photo", photos.get(position));
+
+                    // Add a new document with a generated ID
+                    db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist").document(usernames.get(position)).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
+                    {
+                        @Override
+                        public void onSuccess(Void aVoid)
+                        {
+                            //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener()
+                            {
+                                @Override
+                                public void onFailure(@NonNull Exception e)
+                                {
+                                    Log.w("TAG", "Error adding document", e);
+                                }
+                            });
 
                     Intent intent = new Intent(context,chat_person.class);
+                    intent.putExtra("username",usernames.get(position));
                     context.startActivity(intent);
-
 
                     // denotes that we are going to view something
                     // intent.setData(Uri.parse(urls.get(position)));

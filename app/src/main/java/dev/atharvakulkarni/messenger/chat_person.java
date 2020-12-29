@@ -45,6 +45,7 @@ public class chat_person extends AppCompatActivity
     private final List<MessagesModel> messagesList = new ArrayList<>();
     private FirebaseAuth mAuth;
    // String messageSenderId;
+    String username;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -61,6 +62,8 @@ public class chat_person extends AppCompatActivity
         db = FirebaseFirestore.getInstance();
 
        // messageSenderId = mAuth.getCurrentUser().getUid();
+
+        username = getIntent().getExtras().getString("username");
 
         IntializeControllers();
 
@@ -126,7 +129,7 @@ public class chat_person extends AppCompatActivity
             msg.put("text", message);
 
             // Add a new document with a generated ID
-            db.collection(UserModel.getUsername()).document("person").collection("Adwait").document(String.valueOf(System.currentTimeMillis())).set(msg).addOnSuccessListener(new OnSuccessListener<Void>()
+            db.collection(UserModel.getUsername()).document("person").collection(username).document(String.valueOf(System.currentTimeMillis())).set(msg).addOnSuccessListener(new OnSuccessListener<Void>()
                     {
                         private static final String TAG = "a";
 
@@ -194,7 +197,7 @@ public class chat_person extends AppCompatActivity
             }
         });*/
 
-        db.collection(UserModel.getUsername()).document("person").collection("Adwait")
+        db.collection(UserModel.getUsername()).document("person").collection(username)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
                 {
