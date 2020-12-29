@@ -63,3 +63,21 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - Picasso/Glide
 
 ## Future Additions
+
+<BR><BR>
+
+## 👨‍🔧 Architecture
+This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
+
+![](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
+
+<BR><BR>
+
+## 📱 Contact - Let's become friend  🤝
+- [Portfolio Website](https://kulkarniatharva.github.io/)
+- [Github](https://github.com/KulkarniAtharva)
+- [LinkedIn](https://www.linkedin.com/in/atharva-kulkarni-146279187/)
+- [Facebook](https://www.facebook.com/atharva.kulkarni.96343/)
+
+
+## Licence
