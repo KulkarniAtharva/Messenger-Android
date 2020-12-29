@@ -33,9 +33,7 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - User status
 - Full chat history
 - Send/receive chat messages
-- Sent status
-- Delivered status
-- Read status
+- Delivered-Sent-Read status
 - 'is typing' status
 - Global search
 - Unread messages count
@@ -44,6 +42,10 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - Chat notifications
 - Attachments
 - Online/ Offline & Last Seen 
+- Sending Friend Request
+- Calling Feature
+- Offline support enabled
+- QR Scanner Connect Friend
 
 
 ## Built With
@@ -58,5 +60,24 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - MVVM Architecture
 - RxJava
 - RecyclerView
+- Picasso/Glide
 
 ## Future Additions
+
+<BR><BR>
+
+## 👨‍🔧 Architecture
+This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
+
+![](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
+
+<BR><BR>
+
+## 📱 Contact - Let's become friend  🤝
+- [Portfolio Website](https://kulkarniatharva.github.io/)
+- [Github](https://github.com/KulkarniAtharva)
+- [LinkedIn](https://www.linkedin.com/in/atharva-kulkarni-146279187/)
+- [Facebook](https://www.facebook.com/atharva.kulkarni.96343/)
+
+
+## Licence
