@@ -30,6 +30,8 @@ public class Chats extends Fragment
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     FirebaseFirestore db;
+    ChatsAdapter chatsAdapter;
+    ArrayList<ChatlistModel> list= new ArrayList();
 
     @Nullable
     @Override
@@ -51,8 +53,10 @@ public class Chats extends Fragment
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+        chatsAdapter = new ChatsAdapter(getContext(),list);
+        recyclerView.setAdapter(chatsAdapter);
 
-        db.collection(UserModel.getUsername()).document("friend_requests").collection("friend_requests")
+        db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
                                        {
@@ -65,32 +69,17 @@ public class Chats extends Fragment
                                                    {
                                                        Log.d("TAG", document.getId() + " => " + document.getData());
 
-                                                       temp.add(document.getId());
-
                                                        String names = document.getString("name");
                                                        String photo = document.getString("photo");
 
-                                                       Users_FriendRequest_Model model = new Users_FriendRequest_Model(Users_FriendRequest_Model.FRIENDREQUEST_TYPE, names, photo, document.getId());
+                                                       ChatlistModel model = new ChatlistModel(document.getId(),names,photo);
                                                        list.add(model);
 
-                                                       myAdapter.notifyDataSetChanged();
-                                                       // ((FriendRequestAdapter) recyclerView.getAdapter()).update(names,photo,0);
-
-                                                       //  FriendRequestAdapter myAdapter = new FriendRequestAdapter(recyclerView,FriendRequest.this,list);
+                                                       chatsAdapter.notifyDataSetChanged();
                                                    }
                                                }
                                            }
                                        });
-
-
-
-        // recyclerView.setLayoutManager(new LinearLayoutManager(download.this));
-        ChatsAdapter myAdapter = new ChatsAdapter(recyclerView,getContext(),new ArrayList<String>(),new ArrayList<String>(),new ArrayList<String>());
-        recyclerView.setAdapter(myAdapter);
-
-        ((ChatsAdapter) recyclerView.getAdapter()).update("Atharva","Hi hello","2");
-        ((ChatsAdapter) recyclerView.getAdapter()).update("Atharva","Hi hello","2");
-
         return view;
     }
 }

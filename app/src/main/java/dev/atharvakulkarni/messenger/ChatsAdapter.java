@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -133,17 +134,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 }*/
 
 
-
 public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
 {
-    RecyclerView recyclerView;
     Context context;
-    ArrayList<String> name = new ArrayList<>();
-    ArrayList<String> lastmessage = new ArrayList<>();
-    ArrayList<String> count= new ArrayList<>();
+    private List<ChatlistModel> chatlist;
 
-
-    public void update(String name,String lastmessage,String count)
+   /* public void update(String name,String lastmessage,String count)
     {
         this.name.add(name);
         this.lastmessage.add(lastmessage);
@@ -156,17 +152,14 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
         //if(getItemCount() == 0)
         //    Toast.makeText(context, "No Results Found", Toast.LENGTH_SHORT).show();
         // else
-        notifyDataSetChanged();  // refreshes the recycler view automatically
+        //notifyDataSetChanged();  // refreshes the recycler view automatically
         // Toast.makeText(context, getItemCount()+"", Toast.LENGTH_SHORT).show();
-    }
+   // }*/
 
-    public ChatsAdapter(RecyclerView recyclerView,Context context,ArrayList<String> name,ArrayList<String> lastmessage,ArrayList<String>count)
+    public ChatsAdapter(Context context, List<ChatlistModel> chatlist)
     {
-        this.recyclerView = recyclerView;
         this.context = context;
-        this.name = name;
-        this.lastmessage = lastmessage;
-        this.count = count;
+        this.chatlist = chatlist;
     }
 
     @NonNull
@@ -180,69 +173,34 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
-       /* String givendate = givendates.get(position);
+        ChatlistModel object = chatlist.get(position);
 
-        int given_day = Integer.parseInt(givendate.substring(0,givendate.indexOf('/')));
-        int given_month = Integer.parseInt(givendate.substring(givendate.indexOf('/')+1,givendate.lastIndexOf('/')));
-        int given_year = Integer.parseInt(givendate.substring(givendate.lastIndexOf('/')+1));
-
-        int today_day =  Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        int today_month =  Calendar.getInstance().get(Calendar.MONTH)+1;
-        int today_year = Calendar.getInstance().get(Calendar.YEAR);
-
-        if(given_year == today_year && given_month == today_month)
-        {
-            if(today_day - given_day == 1)
-                givendate = "Yesterday";
-            else if(today_day == given_day)
-                givendate = "Today";
-        }
-
-
-        // initialize the elements of indiv,items
-        holder.filename.setText(title.get(position));
-        holder.givendate.setText(givendate);
-        // holder.duedate.setText(duedates.get(position));
-        // holder.teachername.setText(((usernames.get(position)).toUpperCase().charAt(0))+"");
-
-*/
         /*Glide.with(context)
                 .load(userphotouris.get(position))
                 .into(holder.circleImageView);*/
 
-        holder.name.setText(name.get(position));
-        holder.lastmessage.setText(lastmessage.get(position));
-        holder.count.setText(count.get(position));
+        holder.name.setText(object.name);
+        holder.lastmessage.setText(object.lastmessage);
+        holder.count.setText(object.count);
     }
 
     @Override
     public int getItemCount()       // return the no. of items
     {
-        return name.size();
+        return chatlist.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView filename,duedate,givendate,teachername;
-        CircleImageView circleImageView;
-
         TextView name,lastmessage,count;
 
         public ViewHolder(View itemView)        // represents indiv list items
         {
             super(itemView);
-           /* filename = itemView.findViewById(R.id.nameofFile);
-            givendate = itemView.findViewById(R.id.givend);
-            //duedate = itemView.findViewById(R.id.dued);
-            teachername = itemView.findViewById(R.id.initial);
-            circleImageView = itemView.findViewById(R.id.user_photo);*/
 
             name = itemView.findViewById(R.id.id);
             lastmessage = itemView.findViewById(R.id.type);
             count = itemView.findViewById(R.id.count);
-
-
-
 
             itemView.setOnClickListener(new View.OnClickListener()
             {
