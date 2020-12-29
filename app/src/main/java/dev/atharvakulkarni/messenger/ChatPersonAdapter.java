@@ -15,16 +15,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder>
+public class ChatPersonAdapter extends RecyclerView.Adapter<ChatPersonAdapter.MessageViewHolder>
 {
-    private List<Messages> userMessagesList;
+    private List<MessagesModel> userMessagesList;
     private FirebaseAuth mAuth;
    // private DatabaseReference usersRef;
     Context context;
 
     FirebaseFirestore db;
 
-    public MessageAdapter(List<Messages> userMessagesList, Context context)
+    public ChatPersonAdapter(List<MessagesModel> userMessagesList, Context context)
     {
         this.userMessagesList = userMessagesList;
         this.context = context;
@@ -62,7 +62,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public void onBindViewHolder(@NonNull final MessageViewHolder messageViewHolder, final int position)
     {
         String messageSenderId = mAuth.getCurrentUser().getUid();
-        Messages messages = userMessagesList.get(position);
+        MessagesModel messages = userMessagesList.get(position);
 
       //  messageViewHolder.senderMessageText.setText(messages.getText());
 

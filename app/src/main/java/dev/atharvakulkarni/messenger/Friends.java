@@ -72,10 +72,10 @@ public class Friends extends Fragment
        // linearLayoutManager.setReverseLayout(true);
        // linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        myAdapter = new FriendsAdapter(recyclerView, getContext(), new ArrayList<String>(), new ArrayList<String>());
+        myAdapter = new FriendsAdapter(recyclerView, getContext(), new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>());
         recyclerView.setAdapter(myAdapter);
 
-                db.collection("users")
+                db.collection(UserModel.getUsername()).document("friends").collection("friends")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
                 {
@@ -95,9 +95,7 @@ public class Friends extends Fragment
 
                                 //myAdapter.notifyDataSetChanged();
 
-                                ((FriendsAdapter) recyclerView.getAdapter()).update(names,photo);
-
-
+                                ((FriendsAdapter) recyclerView.getAdapter()).update(names,photo,document.getId());
                             }
                         }
                         else

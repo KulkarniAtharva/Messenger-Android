@@ -1,6 +1,7 @@
 package dev.atharvakulkarni.messenger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,26 +21,27 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
     Context context;
     ArrayList<String> name = new ArrayList<>();
     ArrayList<String> photo = new ArrayList<>();
+    ArrayList<String> username = new ArrayList<>();
 
-
-   public void update(String name, String photo)
+   public void update(String name, String photo,String username)
     {
         this.name.add(name);
         this.photo.add(photo);
+        this.username.add(username);
 
         if(getItemCount() == 0)
            Toast.makeText(context, "No Results Found", Toast.LENGTH_SHORT).show();
          else
            notifyDataSetChanged();  // refreshes the recycler view automatically
-        // Toast.makeText(context, getItemCount()+"", Toast.LENGTH_SHORT).show();
    }
 
-    public FriendsAdapter(RecyclerView recyclerView,Context context,ArrayList<String> name,ArrayList<String> photo)
+    public FriendsAdapter(RecyclerView recyclerView,Context context,ArrayList<String> name,ArrayList<String> photo, ArrayList<String> username)
     {
         this.recyclerView = recyclerView;
         this.context = context;
         this.name = name;
         this.photo = photo;
+        this.username = username;
     }
 
     @NonNull
@@ -54,39 +56,12 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
-       /* String givendate = givendates.get(position);
-
-        int given_day = Integer.parseInt(givendate.substring(0,givendate.indexOf('/')));
-        int given_month = Integer.parseInt(givendate.substring(givendate.indexOf('/')+1,givendate.lastIndexOf('/')));
-        int given_year = Integer.parseInt(givendate.substring(givendate.lastIndexOf('/')+1));
-
-        int today_day =  Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        int today_month =  Calendar.getInstance().get(Calendar.MONTH)+1;
-        int today_year = Calendar.getInstance().get(Calendar.YEAR);
-
-        if(given_year == today_year && given_month == today_month)
-        {
-            if(today_day - given_day == 1)
-                givendate = "Yesterday";
-            else if(today_day == given_day)
-                givendate = "Today";
-        }
-
-
-        // initialize the elements of indiv,items
-        holder.filename.setText(title.get(position));
-        holder.givendate.setText(givendate);
-        // holder.duedate.setText(duedates.get(position));
-        // holder.teachername.setText(((usernames.get(position)).toUpperCase().charAt(0))+"");
-
-*/
         /*Glide.with(context)
                 .load(userphotouris.get(position))
                 .into(holder.circleImageView);*/
 
         holder.name.setText(name.get(position));
         holder.photo.setText(photo.get(position));
-      //  holder.count.setText(count.get(position));
     }
 
     @Override
@@ -97,25 +72,14 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView filename,duedate,givendate,teachername;
-        CircleImageView circleImageView;
-
         TextView name,photo;
 
         public ViewHolder(View itemView)        // represents indiv list items
         {
             super(itemView);
-           /* filename = itemView.findViewById(R.id.nameofFile);
-            givendate = itemView.findViewById(R.id.givend);
-            //duedate = itemView.findViewById(R.id.dued);
-            teachername = itemView.findViewById(R.id.initial);
-            circleImageView = itemView.findViewById(R.id.user_photo);*/
 
             name = itemView.findViewById(R.id.name);
             photo = itemView.findViewById(R.id.photo);
-
-
-
 
             itemView.setOnClickListener(new View.OnClickListener()
             {
@@ -135,8 +99,11 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
 
                     context.startActivity(intent);*/
 
-                   // Intent intent = new Intent(context,chat_person.class);
-                   // context.startActivity(intent);
+
+                    
+
+                    Intent intent = new Intent(context,chat_person.class);
+                    context.startActivity(intent);
 
 
                     // denotes that we are going to view something

@@ -39,13 +39,12 @@ public class chat_person extends AppCompatActivity
     //TextView message_textview;
     FirebaseFirestore db;
     private String saveCurrentTime, saveCurrentDate;
-    private MessageAdapter messageAdapter;
+    private ChatPersonAdapter chatPersonAdapter;
     private RecyclerView userMessagesList;
     private LinearLayoutManager linearLayoutManager;
-    private final List<Messages> messagesList = new ArrayList<>();
+    private final List<MessagesModel> messagesList = new ArrayList<>();
     private FirebaseAuth mAuth;
    // String messageSenderId;
-    UserModel userModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -85,15 +84,13 @@ public class chat_person extends AppCompatActivity
 
     private void IntializeControllers()
     {
-        messageAdapter = new MessageAdapter(messagesList,chat_person.this);
+        chatPersonAdapter = new ChatPersonAdapter(messagesList,chat_person.this);
         userMessagesList = (RecyclerView) findViewById(R.id.private_messages_list_of_users);
         linearLayoutManager = new LinearLayoutManager(this);
        // linearLayoutManager.setReverseLayout(true);
        // linearLayoutManager.setStackFromEnd(true);
         userMessagesList.setLayoutManager(linearLayoutManager);
-        userMessagesList.setAdapter(messageAdapter);
-
-        userModel = new UserModel();
+        userMessagesList.setAdapter(chatPersonAdapter);
 
 
         Calendar calendar = Calendar.getInstance();
@@ -123,13 +120,13 @@ public class chat_person extends AppCompatActivity
         {
             // Create a new user with a first and last name
             Map<String, Object> msg = new HashMap<>();
-            msg.put("from", userModel.getUsername());
+            msg.put("from", UserModel.getUsername());
             msg.put("time", saveCurrentTime);
             msg.put("date", saveCurrentDate);
             msg.put("text", message);
 
             // Add a new document with a generated ID
-            db.collection(userModel.getUsername()).document("person").collection("Adwait").document(String.valueOf(System.currentTimeMillis())).set(msg).addOnSuccessListener(new OnSuccessListener<Void>()
+            db.collection(UserModel.getUsername()).document("person").collection("Adwait").document(String.valueOf(System.currentTimeMillis())).set(msg).addOnSuccessListener(new OnSuccessListener<Void>()
                     {
                         private static final String TAG = "a";
 
@@ -139,7 +136,7 @@ public class chat_person extends AppCompatActivity
                             //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                             Toast.makeText(chat_person.this, "success", Toast.LENGTH_SHORT).show();
                             message_edittext.setText("");
-                            messageAdapter.notifyDataSetChanged();
+                            chatPersonAdapter.notifyDataSetChanged();
 
                             onStart();
                         }
@@ -197,7 +194,7 @@ public class chat_person extends AppCompatActivity
             }
         });*/
 
-        db.collection(userModel.getUsername()).document("person").collection("Adwait")
+        db.collection(UserModel.getUsername()).document("person").collection("Adwait")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
                 {
@@ -210,9 +207,9 @@ public class chat_person extends AppCompatActivity
                             {
                                // Log.d(TAG, document.getId() + " => " + document.getData());
 
-                                Messages messages = document.toObject(Messages.class);
+                                MessagesModel messages = document.toObject(MessagesModel.class);
                                 messagesList.add(messages);
-                                messageAdapter.notifyDataSetChanged();
+                                chatPersonAdapter.notifyDataSetChanged();
                                 userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
                             }
                         }

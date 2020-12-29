@@ -1,15 +1,15 @@
 package dev.atharvakulkarni.messenger;
 
-public class Messages
+public class MessagesModel
 {
     private String date, from, text, time;
 
-    public Messages()
+    public MessagesModel()
     {
 
     }
 
-    public Messages(String date, String from, String text, String time)
+    public MessagesModel(String date, String from, String text, String time)
     {
         this.date = date;
         this.from = from;
