@@ -138,6 +138,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
 {
     Context context;
     private List<ChatlistModel> chatlist;
+    RecyclerView recyclerView;
 
    /* public void update(String name,String lastmessage,String count)
     {
@@ -156,10 +157,11 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
         // Toast.makeText(context, getItemCount()+"", Toast.LENGTH_SHORT).show();
    // }*/
 
-    public ChatsAdapter(Context context, List<ChatlistModel> chatlist)
+    public ChatsAdapter(Context context, RecyclerView recyclerView,List<ChatlistModel> chatlist)
     {
         this.context = context;
         this.chatlist = chatlist;
+        this.recyclerView = recyclerView;
     }
 
     @NonNull

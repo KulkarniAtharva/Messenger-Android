@@ -53,7 +53,7 @@ public class Chats extends Fragment
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        chatsAdapter = new ChatsAdapter(getContext(),list);
+        chatsAdapter = new ChatsAdapter(getContext(),recyclerView,list);
         recyclerView.setAdapter(chatsAdapter);
 
         db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist")
@@ -63,9 +63,9 @@ public class Chats extends Fragment
                                            @Override
                                            public void onComplete(@NonNull Task<QuerySnapshot> task)
                                            {
-                                               if (task.isSuccessful())
+                                               if(task.isSuccessful())
                                                {
-                                                   for (QueryDocumentSnapshot document : task.getResult())
+                                                   for(QueryDocumentSnapshot document : task.getResult())
                                                    {
                                                        Log.d("TAG", document.getId() + " => " + document.getData());
 
