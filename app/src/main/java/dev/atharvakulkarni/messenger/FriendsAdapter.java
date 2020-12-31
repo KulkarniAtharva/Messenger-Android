@@ -109,9 +109,13 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
                     context.startActivity(intent);*/
 
 
+
+
+
                     Map<String, Object> user = new HashMap<>();
                     user.put("name", UserModel.getUsername());
                     user.put("photo", photos.get(position));
+
 
                     // Add a new document with a generated ID
                     db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist").document(usernames.get(position)).set(user).addOnSuccessListener(new OnSuccessListener<Void>()

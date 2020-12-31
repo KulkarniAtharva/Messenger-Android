@@ -154,6 +154,38 @@ public class chat_person extends AppCompatActivity
                             Log.w(TAG, "Error adding document", e);
                         }
                     });
+
+
+            Map<String, Object> msg1 = new HashMap<>();
+            msg1.put("last_message", message);
+            msg1.put("last_time", saveCurrentTime);
+
+            // Add a new document with a generated ID
+            db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist").document(username).set(msg1).addOnSuccessListener(new OnSuccessListener<Void>()
+            {
+                private static final String TAG = "a";
+
+                @Override
+                public void onSuccess(Void aVoid)
+                {
+                    //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    Toast.makeText(chat_person.this, "success", Toast.LENGTH_SHORT).show();
+                    message_edittext.setText("");
+                    chatPersonAdapter.notifyDataSetChanged();
+
+                    onStart();
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener()
+                    {
+                        private static final String TAG = "b";
+
+                        @Override
+                        public void onFailure(@NonNull Exception e)
+                        {
+                            Log.w(TAG, "Error adding document", e);
+                        }
+                    });
         }
     }
 
@@ -196,6 +228,10 @@ public class chat_person extends AppCompatActivity
                 }
             }
         });*/
+
+
+
+
 
         db.collection(UserModel.getUsername()).document("person").collection(username)
                 .get()

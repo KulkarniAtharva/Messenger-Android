@@ -139,6 +139,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
     Context context;
     private List<ChatlistModel> chatlist;
     RecyclerView recyclerView;
+    ChatlistModel object;
 
    /* public void update(String name,String lastmessage,String count)
     {
@@ -175,7 +176,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
-        ChatlistModel object = chatlist.get(position);
+        object = chatlist.get(position);
 
         /*Glide.with(context)
                 .load(userphotouris.get(position))
@@ -223,8 +224,8 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
                     context.startActivity(intent);*/
 
                     Intent intent = new Intent(context,chat_person.class);
+                    intent.putExtra("username",object.username);
                     context.startActivity(intent);
-
 
                     // denotes that we are going to view something
                     // intent.setData(Uri.parse(urls.get(position)));
