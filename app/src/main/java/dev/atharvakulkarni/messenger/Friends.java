@@ -66,8 +66,7 @@ public class Friends extends Fragment
 
         // recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
-        // custom adapters always
-        // populate the recycler view with items
+        // custom adapters always populate the recycler view with items
         linearLayoutManager = new LinearLayoutManager(getContext());
        // linearLayoutManager.setReverseLayout(true);
        // linearLayoutManager.setStackFromEnd(true);
@@ -84,18 +83,21 @@ public class Friends extends Fragment
                     {
                         if(task.isSuccessful())
                         {
-                            for (QueryDocumentSnapshot document : task.getResult())
+                            for(QueryDocumentSnapshot document : task.getResult())
                             {
                                 // Log.d(TAG, document.getId() + " => " + document.getData());
 
-                                names = document.getString("name");
-                                photo = document.getString("photo");
+                                    names = document.getString("name");
+                                    photo = document.getString("photo");
 
-                               // Toast.makeText(getContext(), names.get(0), Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(getContext(), names.get(0), Toast.LENGTH_SHORT).show();
 
-                                //myAdapter.notifyDataSetChanged();
+                                    //myAdapter.notifyDataSetChanged();
 
-                                ((FriendsAdapter) recyclerView.getAdapter()).update(names,photo,document.getId());
+                                    if(names != null)
+                                        ((FriendsAdapter) recyclerView.getAdapter()).update(names, photo, document.getId());
+                                    else
+                                        Toast.makeText(getContext(), "No Friends", Toast.LENGTH_SHORT).show();
                             }
                         }
                         else
@@ -104,9 +106,6 @@ public class Friends extends Fragment
                         }
                     }
                 });
-
-
-
         return view;
     }
 }

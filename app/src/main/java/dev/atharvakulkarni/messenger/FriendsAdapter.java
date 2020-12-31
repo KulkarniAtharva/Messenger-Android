@@ -108,10 +108,6 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
 
                     context.startActivity(intent);*/
 
-
-
-
-
                     Map<String, Object> user = new HashMap<>();
                     user.put("name", UserModel.getUsername());
                     user.put("photo", photos.get(position));

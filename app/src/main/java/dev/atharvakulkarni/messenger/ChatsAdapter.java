@@ -201,9 +201,10 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
         {
             super(itemView);
 
-            name = itemView.findViewById(R.id.id);
-            lastmessage = itemView.findViewById(R.id.type);
+            name = itemView.findViewById(R.id.name);
+            lastmessage = itemView.findViewById(R.id.last_message);
             count = itemView.findViewById(R.id.count);
+            lastmessage = itemView.findViewById(R.id.last_message);
 
             itemView.setOnClickListener(new View.OnClickListener()
             {

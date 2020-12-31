@@ -82,7 +82,6 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
         mAuth = FirebaseAuth.getInstance();
       //  messageSenderId = mAuth.getCurrentUser().getUid();
 
-
         View view;
         switch (viewType)
         {
@@ -161,14 +160,11 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
                     // Add a new document with a generated ID
                     db.collection(object.username).document("friend_requests").collection("friend_requests").document(UserModel.getUsername()).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
                     {
-                        private static final String TAG = "a";
-
                         @Override
                         public void onSuccess(Void aVoid)
                         {
                             //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                            // Toast.makeText(context, "Friend Request sent to "+object.names, Toast.LENGTH_SHORT).show();
-
                         }
                     })
                             .addOnFailureListener(new OnFailureListener()
@@ -253,7 +249,6 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
                                     Log.w("b", "Error adding document", e);
                                 }
                             });
-
 
                     db.collection(UserModel.getUsername()).document("friend_requests").collection("friend_requests").document(object.username)
                             .delete()

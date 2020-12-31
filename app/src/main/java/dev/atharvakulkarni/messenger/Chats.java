@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,7 +32,7 @@ public class Chats extends Fragment
     LinearLayoutManager linearLayoutManager;
     FirebaseFirestore db;
     ChatsAdapter chatsAdapter;
-    ArrayList<ChatlistModel> list= new ArrayList();
+    ArrayList<ChatlistModel> list = new ArrayList();
 
     @Nullable
     @Override
@@ -74,9 +75,12 @@ public class Chats extends Fragment
                                                        String last_message = document.getString("last_message");
                                                        String last_time = document.getString("last_time");
 
-
                                                        ChatlistModel model = new ChatlistModel(document.getId(),names,photo,last_message,"count",last_time);
-                                                       list.add(model);
+
+                                                       if(names != null)
+                                                           list.add(model);
+                                                       else
+                                                           Toast.makeText(getContext(), "No Chats", Toast.LENGTH_SHORT).show();
 
                                                        chatsAdapter.notifyDataSetChanged();
                                                    }

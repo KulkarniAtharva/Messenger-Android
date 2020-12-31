@@ -46,9 +46,8 @@ public class signin_signup extends AppCompatActivity
     SigninSignupBinding signinSignupBinding;
     // SignInSignUpViewModel signInSignUpViewModel;
     private FirebaseAuth mAuth;
-    String username,password,name,reenterpassword;
+    String username,password,name,reenterpassword, saveCurrentTime, saveCurrentDate;
     FirebaseFirestore db;
-    private String saveCurrentTime, saveCurrentDate;//messageSenderId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -201,73 +200,10 @@ public class signin_signup extends AppCompatActivity
                         }
                     }
                 });
-
-      /*  Map<String, Object> user = new HashMap<>();
-        user.put("name", name);
-        user.put("userid", messageSenderId);
-
-
-
-        // Add a new document with a generated ID
-        db.collection("users").document(messageSenderId).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
-        {
-            private static final String TAG = "a";
-
-            @Override
-            public void onSuccess(Void aVoid)
-            {
-                //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                Toast.makeText(signin_signup.this, "success", Toast.LENGTH_SHORT).show();
-            }
-        })
-                .addOnFailureListener(new OnFailureListener()
-                {
-                    private static final String TAG = "b";
-
-                    @Override
-                    public void onFailure(@NonNull Exception e)
-                    {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });*/
-
-
-
     }
 
     void createUser()
     {
-        // Create a new user with a first and last name
-      /*  Map<String, Object> info = new HashMap<>();
-        //info.put("name", name);
-        info.put("on_off_status", "Online");
-        info.put("Last Seen",getCurrentDateTime());
-
-        // Add a new document with a generated ID
-        db.collection(signup_username).document("info").set(info).addOnSuccessListener(new OnSuccessListener<Void>()
-        {
-            private static final String TAG = "a";
-
-            @Override
-            public void onSuccess(Void aVoid)
-            {
-                //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                Toast.makeText(signin_signup.this, "success", Toast.LENGTH_SHORT).show();
-            }
-        })
-                .addOnFailureListener(new OnFailureListener()
-                {
-                    private static final String TAG = "b";
-
-                    @Override
-                    public void onFailure(@NonNull Exception e)
-                    {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });*/
-
-
-
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
         user.put("name", name);
@@ -275,51 +211,54 @@ public class signin_signup extends AppCompatActivity
         user.put("photo","photo");
         user.put("last_seen",getCurrentDateTime());
         user.put("on_off_status", "Online");
-       // user.put("userid",messageSenderId);
 
         // Add a new document with a generated ID
-        db.collection("users").document(username.substring(0,username.indexOf("@gmail.com"))).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
+        db.collection("users").document(UserModel.getUsername()).set(user).addOnSuccessListener(new OnSuccessListener<Void>()
         {
-            private static final String TAG = "a";
-
             @Override
             public void onSuccess(Void aVoid)
             {
                 //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                 Toast.makeText(signin_signup.this, "success", Toast.LENGTH_SHORT).show();
             }
-        })
-                .addOnFailureListener(new OnFailureListener()
-                {
-                    private static final String TAG = "b";
-
-                    @Override
-                    public void onFailure(@NonNull Exception e)
-                    {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
-
-
+        });
 
         Map<String, Object> city = new HashMap<>();
 
-        db.collection(username.substring(0,username.indexOf("@gmail.com"))).document("person")
+        db.collection(UserModel.getUsername()).document("person")
                 .set(city)
                 .addOnSuccessListener(new OnSuccessListener<Void>()
                 {
                     @Override
                     public void onSuccess(Void aVoid)
                     {
-                        //Log.d(TAG, "DocumentSnapshot successfully written!");
                     }
-                })
-                .addOnFailureListener(new OnFailureListener()
+                });
+
+        db.collection(UserModel.getUsername()).document("friends").collection("friends").add(city)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>()
+                {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference)
+                        {
+                        }
+                });
+
+
+        db.collection(UserModel.getUsername()).document("friend_requests").collection("friend_requests").add(city)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>()
                 {
                     @Override
-                    public void onFailure(@NonNull Exception e)
+                    public void onSuccess(DocumentReference documentReference)
+                    {}
+                });
+
+        db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist").add(city)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>()
+                {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference)
                     {
-                      //  Log.w(TAG, "Error writing document", e);
                     }
                 });
     }

@@ -95,7 +95,11 @@ public class FriendRequest extends AppCompatActivity
                                 String photo = document.getString("photo");
 
                                 Users_FriendRequest_Model model = new Users_FriendRequest_Model(Users_FriendRequest_Model.FRIENDREQUEST_TYPE,names,photo,document.getId());
-                                list.add(model);
+
+                                if(names != null)
+                                    list.add(model);
+                                else
+                                    Toast.makeText(FriendRequest.this, "No Friend Requests", Toast.LENGTH_SHORT).show();
 
                                 myAdapter.notifyDataSetChanged();
                                 // ((FriendRequestAdapter) recyclerView.getAdapter()).update(names,photo,0);
