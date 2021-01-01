@@ -38,7 +38,7 @@ public class FriendRequest extends AppCompatActivity
     FirebaseFirestore db;
     private FirebaseAuth mAuth;
     String messageSenderId;
-    ArrayList<Users_FriendRequest_Model> list= new ArrayList();
+    ArrayList<Users_FriendRequest_Model> list = new ArrayList();
     FriendRequestAdapter myAdapter;
 
     @Override

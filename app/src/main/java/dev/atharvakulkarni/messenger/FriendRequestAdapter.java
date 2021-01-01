@@ -154,7 +154,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter
                     Toast.makeText(context, object.username, Toast.LENGTH_SHORT).show();
 
                     Map<String, Object> user = new HashMap<>();
-                    user.put("name", UserModel.getName());
+                    user.put("name", object.names);
                     user.put("photo","photo");
 
                     // Add a new document with a generated ID
