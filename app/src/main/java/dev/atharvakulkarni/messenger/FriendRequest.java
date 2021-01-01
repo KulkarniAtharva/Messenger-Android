@@ -118,7 +118,7 @@ public class FriendRequest extends AppCompatActivity
                                             {
                                                 for (QueryDocumentSnapshot document : task.getResult())
                                                 {
-                                                    Log.d("TAG1", document.getId() + " => " + document.getData());
+                                                    Log.d("TAG1",document.getId() + " => " + document.getData());
 
                                                     String names = document.getString("name");
                                                     String photo = document.getString("photo");
@@ -139,9 +139,6 @@ public class FriendRequest extends AppCompatActivity
                                                         }
                                                     }
 
-
-
-
                                                     myAdapter.notifyDataSetChanged();
                                                    // ((FriendRequestAdapter) recyclerView.getAdapter()).update(list);
 
@@ -161,12 +158,6 @@ public class FriendRequest extends AppCompatActivity
                         }
                     }
                 });
-
-
-
-
-
-
     }
 
     /*@Override
