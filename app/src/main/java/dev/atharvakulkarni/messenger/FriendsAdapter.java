@@ -124,6 +124,13 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
                     Intent intent = new Intent(context,chat_person.class);
                     intent.putExtra("username",usernames.get(position));
                     context.startActivity(intent);
+
+                    // denotes that we are going to view something
+                    // intent.setData(Uri.parse(urls.get(position)));
+                    //intent.setType(Intent.ACTION_VIEW);
+
+                   /* intent.setDataAndType(Uri.parse((urls.get(position))),Intent.ACTION_VIEW);
+                    context.startActivity(intent);*/
                 }
             });
         }

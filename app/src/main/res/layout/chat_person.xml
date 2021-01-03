@@ -38,19 +38,17 @@
                     android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/chat_with"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:id="@+id/textView_toolbar_title"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:text="Atharva"/>
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
                 <TextView
-                    android:id="@+id/textView_toolbar_description"
+                    android:id="@+id/on_off_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="Online"/>
+                    android:textColor="@color/white" />
 
                 </LinearLayout>
 
