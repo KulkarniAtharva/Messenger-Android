@@ -214,27 +214,12 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
                 {
                     int position = recyclerView.getChildLayoutPosition(view);
 
-                   /* Intent intent = new Intent(context, download_each.class);
-                    intent.putExtra("title",title.get(position));
-                    intent.putExtra("description",description.get(position));
-                    intent.putExtra("duedate",duedates.get(position));
-                    intent.putExtra("givendate",givendates.get(position));
-                    intent.putExtra("teachername",usernames.get(position));
-                    intent.putExtra("url",urls.get(position));
-                    intent.putExtra("position",position);
-
-                    context.startActivity(intent);*/
-
                     Intent intent = new Intent(context,chat_person.class);
-                    intent.putExtra("username",object.username);
+
+                    ChatWithGetData.user(context, object.username);
+
+                  // intent.putExtra("username",object.username);
                     context.startActivity(intent);
-
-                    // denotes that we are going to view something
-                    // intent.setData(Uri.parse(urls.get(position)));
-                    //intent.setType(Intent.ACTION_VIEW);
-
-                   /* intent.setDataAndType(Uri.parse((urls.get(position))),Intent.ACTION_VIEW);
-                    context.startActivity(intent);*/
                 }
             });
         }

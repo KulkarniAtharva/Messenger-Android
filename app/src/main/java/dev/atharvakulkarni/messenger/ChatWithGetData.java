@@ -1,7 +1,9 @@
 package dev.atharvakulkarni.messenger;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,16 +17,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class UserProfile 
+public class ChatWithGetData
 {
     static FirebaseFirestore db;
 
-
-    static void user()
+    static void user(Context context, String username)
     {
         db = FirebaseFirestore.getInstance();
 
-        DocumentReference docRef = db.collection("users").document(UserModel.getUsername());
+        DocumentReference docRef = db.collection("users").document(username);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()
         {
             @Override
@@ -41,13 +42,17 @@ public class UserProfile
                         String photo = document.getString("photo");
                         String status = document.getString("status");
 
-                        UserModel.setLast_seen(last_seen);
-                        UserModel.setOn_off_status(on_off_status);
-                        UserModel.setStatus(status);
-                        UserModel.setName(name);
-                        UserModel.setPhoto(photo);
+                        ChatWithModel.setLast_seen(last_seen);
+                        ChatWithModel.setOn_off_status(on_off_status);
+                        ChatWithModel.setStatus(status);
+                        ChatWithModel.setName(name);
+                        ChatWithModel.setPhoto(photo);
+                        ChatWithModel.setUsername(username);
 
-                        Log.d("TAG", "DocumentSnapshot data: " + document.getData());
+                       // Toast.makeText(context, ChatWithModel.getUsername(), Toast.LENGTH_SHORT).show();
+
+
+                        Log.d("TAG", "DocumentSnapshot data1111: " + document.getData());
                     }
                     else
                     {
@@ -58,7 +63,5 @@ public class UserProfile
                 }
             }
         });
-
-
     }
 }

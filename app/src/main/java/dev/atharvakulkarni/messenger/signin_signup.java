@@ -2,10 +2,8 @@ package dev.atharvakulkarni.messenger;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,21 +12,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -85,9 +77,9 @@ public class signin_signup extends AppCompatActivity
                 username = signin_username_edittext.getText().toString()+"@gmail.com";
                 password = signin_password_edittext.getText().toString();
 
-                UserModel.setUsername(signin_username_edittext.getText().toString());
+                //UserModel.setUsername(signin_username_edittext.getText().toString());
 
-                UserProfile.user();
+                UserGetData.user(signin_username_edittext.getText().toString());
 
                 loginUserAccount(username,password);
             }
@@ -103,9 +95,9 @@ public class signin_signup extends AppCompatActivity
                 password = signup_password_edittext.getText().toString();
                 reenterpassword = signup_reenterpassword_edittext.getText().toString();
 
-                UserModel.setUsername(signup_username_edittext.getText().toString());
+               // UserModel.setUsername();
 
-                UserProfile.user();
+                UserGetData.user(signup_username_edittext.getText().toString());
 
                 if(password.equals(reenterpassword))
                     signupUserAccount(name,username,password);

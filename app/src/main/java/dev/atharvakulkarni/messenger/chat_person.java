@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,7 +37,7 @@ public class chat_person extends AppCompatActivity
     EditText message_edittext;
     FrameLayout send;
     String message;
-    //TextView message_textview;
+    TextView chat_with;
     FirebaseFirestore db;
     private String saveCurrentTime, saveCurrentDate;
     private ChatPersonAdapter chatPersonAdapter;
@@ -45,7 +46,6 @@ public class chat_person extends AppCompatActivity
     private final List<MessagesModel> messagesList = new ArrayList<>();
     private FirebaseAuth mAuth;
    // String messageSenderId;
-    String username;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -54,8 +54,9 @@ public class chat_person extends AppCompatActivity
         setContentView(R.layout.chat_person);
 
         message_edittext = findViewById(R.id.editText_message);
-      //  message_textview = findViewById(R.id.message_textview);
+        chat_with = findViewById(R.id.chat_with);
         send = findViewById(R.id.send);
+
         mAuth = FirebaseAuth.getInstance();
 
         // Access a Cloud Firestore instance from your Activity
@@ -63,10 +64,11 @@ public class chat_person extends AppCompatActivity
 
        // messageSenderId = mAuth.getCurrentUser().getUid();
 
-        username = getIntent().getExtras().getString("username");
+       // username = getIntent().getExtras().getString("username");
 
+        chat_with.setText(ChatWithModel.getName());
 
-        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,UserModel.getUsername()+"   "+ ChatWithModel.getUsername(), Toast.LENGTH_SHORT).show();
 
         IntializeControllers();
 
@@ -76,15 +78,12 @@ public class chat_person extends AppCompatActivity
             public void onClick(View view)
             {
                 SendMessage();
-
-
             }
         });
 
         DisplayLastSeen();
 
-
-        db.collection(UserModel.getUsername()).document("person").collection(username)
+      /*  db.collection(UserModel.getUsername()).document("person").collection(ChatWithModel.getUsername())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
                 {
@@ -108,11 +107,7 @@ public class chat_person extends AppCompatActivity
                             Log.d("TAG", "Error getting documents: ", task.getException());
                         }
                     }
-                });
-
-
-
-
+                });*/
     }
 
     private void IntializeControllers()
@@ -159,7 +154,7 @@ public class chat_person extends AppCompatActivity
             msg.put("text", message);
 
             // Add a new document with a generated ID
-            db.collection(UserModel.getUsername()).document("person").collection(username).document(String.valueOf(System.currentTimeMillis())).set(msg).addOnSuccessListener(new OnSuccessListener<Void>()
+            db.collection(UserModel.getUsername()).document("person").collection(ChatWithModel.getUsername()).document(String.valueOf(System.currentTimeMillis())).set(msg).addOnSuccessListener(new OnSuccessListener<Void>()
                     {
                         private static final String TAG = "a";
 
@@ -191,7 +186,7 @@ public class chat_person extends AppCompatActivity
             msg1.put("last_time", saveCurrentTime);
 
             // Add a new document with a generated ID
-            db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist").document(username).set(msg1).addOnSuccessListener(new OnSuccessListener<Void>()
+            db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist").document(ChatWithModel.getUsername()).set(msg1).addOnSuccessListener(new OnSuccessListener<Void>()
             {
                 private static final String TAG = "a";
 
