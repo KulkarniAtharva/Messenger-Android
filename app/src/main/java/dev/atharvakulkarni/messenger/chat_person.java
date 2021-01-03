@@ -65,6 +65,9 @@ public class chat_person extends AppCompatActivity
 
         username = getIntent().getExtras().getString("username");
 
+
+        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
+
         IntializeControllers();
 
         send.setOnClickListener(new View.OnClickListener()
@@ -79,6 +82,33 @@ public class chat_person extends AppCompatActivity
         });
 
         DisplayLastSeen();
+
+
+        db.collection(UserModel.getUsername()).document("person").collection(username)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task)
+                    {
+                        if(task.isSuccessful())
+                        {
+                            for (QueryDocumentSnapshot document : task.getResult())
+                            {
+                                // Log.d(TAG, document.getId() + " => " + document.getData());
+
+                                MessagesModel messages = document.toObject(MessagesModel.class);
+                                messagesList.add(messages);
+                                chatPersonAdapter.notifyDataSetChanged();
+                                userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
+                            }
+                        }
+                        else
+                        {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
 
 
 
@@ -141,7 +171,7 @@ public class chat_person extends AppCompatActivity
                             message_edittext.setText("");
                             chatPersonAdapter.notifyDataSetChanged();
 
-                            onStart();
+                            //onStart();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener()
@@ -169,11 +199,11 @@ public class chat_person extends AppCompatActivity
                 public void onSuccess(Void aVoid)
                 {
                     //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    Toast.makeText(chat_person.this, "success", Toast.LENGTH_SHORT).show();
-                    message_edittext.setText("");
-                    chatPersonAdapter.notifyDataSetChanged();
+                 //   Toast.makeText(chat_person.this, "success", Toast.LENGTH_SHORT).show();
+                  //  message_edittext.setText("");
+                  //  chatPersonAdapter.notifyDataSetChanged();
 
-                    onStart();
+                   // onStart();
                 }
             })
                     .addOnFailureListener(new OnFailureListener()
@@ -233,30 +263,6 @@ public class chat_person extends AppCompatActivity
 
 
 
-        db.collection(UserModel.getUsername()).document("person").collection(username)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
-                {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task)
-                    {
-                        if(task.isSuccessful())
-                        {
-                            for (QueryDocumentSnapshot document : task.getResult())
-                            {
-                               // Log.d(TAG, document.getId() + " => " + document.getData());
 
-                                MessagesModel messages = document.toObject(MessagesModel.class);
-                                messagesList.add(messages);
-                                chatPersonAdapter.notifyDataSetChanged();
-                                userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
-                            }
-                        }
-                        else
-                        {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
     }
 }

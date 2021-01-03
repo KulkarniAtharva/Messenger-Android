@@ -89,7 +89,6 @@ public class FriendRequest extends AppCompatActivity
                             {
                                 Log.d("TAG", document.getId() + " => " + document.getData());
 
-                                temp.add(document.getId());
 
                                 String names = document.getString("name");
                                 String photo = document.getString("photo");
@@ -97,7 +96,10 @@ public class FriendRequest extends AppCompatActivity
                                 Users_FriendRequest_Model model = new Users_FriendRequest_Model(Users_FriendRequest_Model.FRIENDREQUEST_TYPE,names,photo,document.getId());
 
                                 if(names != null)
+                                {
                                     list.add(model);
+                                    temp.add(document.getId());
+                                }
                                 else
                                     Toast.makeText(FriendRequest.this, "No Friend Requests", Toast.LENGTH_SHORT).show();
 
@@ -127,14 +129,14 @@ public class FriendRequest extends AppCompatActivity
 
                                                     if(temp.isEmpty())
                                                     {
-                                                        if (!(UserModel.getUsername().equals(document.getId())))
+                                                        if(!(UserModel.getUsername().equals(document.getId())))
                                                             list.add(model);
                                                     }
                                                     else
                                                     {
-                                                        for (String temp : temp)
+                                                        for(String temp : temp)
                                                         {
-                                                            if (!(UserModel.getUsername().equals(document.getId())) && !(temp.equals(document.getId())))
+                                                            if(!(UserModel.getUsername().equals(document.getId())) && !(temp.equals(document.getId())))
                                                                 list.add(model);
                                                         }
                                                     }

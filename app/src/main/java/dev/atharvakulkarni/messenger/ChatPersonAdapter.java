@@ -68,7 +68,7 @@ public class ChatPersonAdapter extends RecyclerView.Adapter<ChatPersonAdapter.Me
 
        // Toast.makeText(context, messages.getText(), Toast.LENGTH_SHORT).show();
 
-        String fromUserID = messages.getFrom();
+        String fromUsername = messages.getFrom();
        // String fromMessageType = messages.getType();
 
        // usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(fromUserID);
@@ -103,7 +103,7 @@ public class ChatPersonAdapter extends RecyclerView.Adapter<ChatPersonAdapter.Me
 
        // if (fromMessageType.equals("text"))
         {
-            if (fromUserID.equals(messageSenderId))
+            if (fromUsername.equals(UserModel.getUsername()))
             {
                 messageViewHolder.senderMessageText.setVisibility(View.VISIBLE);
 

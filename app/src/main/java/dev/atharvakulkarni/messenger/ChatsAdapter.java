@@ -185,6 +185,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
         holder.name.setText(object.name);
         holder.lastmessage.setText(object.lastmessage);
         holder.count.setText(object.count);
+        holder.lasttime.setText(object.last_time);
     }
 
     @Override
@@ -195,7 +196,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView name,lastmessage,count;
+        TextView name,lastmessage,count,lasttime;
 
         public ViewHolder(View itemView)        // represents indiv list items
         {
@@ -204,7 +205,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
             name = itemView.findViewById(R.id.name);
             lastmessage = itemView.findViewById(R.id.last_message);
             count = itemView.findViewById(R.id.count);
-            lastmessage = itemView.findViewById(R.id.last_message);
+            lasttime = itemView.findViewById(R.id.last_time);
 
             itemView.setOnClickListener(new View.OnClickListener()
             {
