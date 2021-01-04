@@ -21,7 +21,7 @@ public class ChatWithGetData
 {
     static FirebaseFirestore db;
 
-    static void user(Context context, String username)
+    static void user(String username)
     {
         db = FirebaseFirestore.getInstance();
 
@@ -50,7 +50,6 @@ public class ChatWithGetData
                         ChatWithModel.setUsername(username);
 
                        // Toast.makeText(context, ChatWithModel.getUsername(), Toast.LENGTH_SHORT).show();
-
 
                         Log.d("TAG", "DocumentSnapshot data1111: " + document.getData());
                     }

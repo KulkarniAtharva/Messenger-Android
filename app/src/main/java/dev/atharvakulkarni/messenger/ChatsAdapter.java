@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -216,9 +217,11 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
 
                     Intent intent = new Intent(context,chat_person.class);
 
-                    ChatWithGetData.user(context, object.username);
 
-                  // intent.putExtra("username",object.username);
+
+                   // Toast.makeText(context, ChatWithModel.getUsername(), Toast.LENGTH_SHORT).show();
+
+                   intent.putExtra("username",chatlist.get(position).username);
                     context.startActivity(intent);
                 }
             });

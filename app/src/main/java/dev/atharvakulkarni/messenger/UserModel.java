@@ -54,7 +54,7 @@ public class UserModel
     {
     }
 
-    public static  String getUsername()
+    public static String getUsername()
     {
         return username;
     }

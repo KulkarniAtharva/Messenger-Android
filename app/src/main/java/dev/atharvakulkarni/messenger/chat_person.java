@@ -36,7 +36,7 @@ public class chat_person extends AppCompatActivity
 {
     EditText message_edittext;
     FrameLayout send;
-    String message;
+    String message, username;
     TextView chat_with;
     FirebaseFirestore db;
     private String saveCurrentTime, saveCurrentDate;
@@ -62,15 +62,19 @@ public class chat_person extends AppCompatActivity
         // Access a Cloud Firestore instance from your Activity
         db = FirebaseFirestore.getInstance();
 
+        IntializeControllers();
+
        // messageSenderId = mAuth.getCurrentUser().getUid();
 
-       // username = getIntent().getExtras().getString("username");
+        username = getIntent().getExtras().getString("username");
+
+        ChatWithGetData.user(username);
 
         chat_with.setText(ChatWithModel.getName());
 
         Toast.makeText(this,UserModel.getUsername()+"   "+ ChatWithModel.getUsername(), Toast.LENGTH_SHORT).show();
 
-        IntializeControllers();
+
 
         send.setOnClickListener(new View.OnClickListener()
         {
@@ -83,7 +87,7 @@ public class chat_person extends AppCompatActivity
 
         DisplayLastSeen();
 
-      /*  db.collection(UserModel.getUsername()).document("person").collection(ChatWithModel.getUsername())
+       db.collection(UserModel.getUsername()).document("person").collection(ChatWithModel.getUsername())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
                 {
@@ -107,7 +111,7 @@ public class chat_person extends AppCompatActivity
                             Log.d("TAG", "Error getting documents: ", task.getException());
                         }
                     }
-                });*/
+                });
     }
 
     private void IntializeControllers()
