@@ -66,7 +66,9 @@ public class chat_person extends AppCompatActivity
 
        // messageSenderId = mAuth.getCurrentUser().getUid();
 
-        username = getIntent().getExtras().getString("username");
+       // username = getIntent().getExtras().getString("username");
+
+
 
         ChatWithGetData.user(username);
 
@@ -74,7 +76,7 @@ public class chat_person extends AppCompatActivity
 
         Toast.makeText(this,UserModel.getUsername()+"   "+ ChatWithModel.getUsername(), Toast.LENGTH_SHORT).show();
 
-
+        ChatWithModel.setUsername(username);
 
         send.setOnClickListener(new View.OnClickListener()
         {
