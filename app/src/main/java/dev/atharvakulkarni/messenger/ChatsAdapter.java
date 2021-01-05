@@ -219,7 +219,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
 
 
 
-                   // Toast.makeText(context, ChatWithModel.getUsername(), Toast.LENGTH_SHORT).show();
+                  // Toast.makeText(context, chatlist.get(position).username, Toast.LENGTH_SHORT).show();
 
                     intent.putExtra("username",chatlist.get(position).username);
                     context.startActivity(intent);

@@ -95,7 +95,7 @@ public class signin_signup extends AppCompatActivity
                 password = signup_password_edittext.getText().toString();
                 reenterpassword = signup_reenterpassword_edittext.getText().toString();
 
-               // UserModel.setUsername(signup_username_edittext.getText().toString());
+              //  UserModel.setUsername(signup_username_edittext.getText().toString());
 
                 UserGetData.user(signup_username_edittext.getText().toString());
 

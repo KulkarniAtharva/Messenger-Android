@@ -75,7 +75,7 @@ public class Chats extends Fragment
                                                        String last_message = document.getString("last_message");
                                                        String last_time = document.getString("last_time");
 
-                                                       ChatlistModel model = new ChatlistModel(document.getId(),names,photo,last_message,"count",last_time);
+                                                       ChatlistModel model = new ChatlistModel(document.getId(),names,photo,last_message,"1",last_time);
 
                                                        if(names != null)
                                                            list.add(model);

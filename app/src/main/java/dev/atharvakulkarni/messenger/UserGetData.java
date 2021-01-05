@@ -1,7 +1,10 @@
 package dev.atharvakulkarni.messenger;
 
+
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,6 +48,9 @@ public class UserGetData
                         UserModel.setStatus(status);
                         UserModel.setName(name);
                         UserModel.setPhoto(photo);
+
+                       // Toast.makeText(context, username, Toast.LENGTH_SHORT).show();
+
                         UserModel.setUsername(username);
 
                         Log.d("TAG", "DocumentSnapshot data: " + document.getData());

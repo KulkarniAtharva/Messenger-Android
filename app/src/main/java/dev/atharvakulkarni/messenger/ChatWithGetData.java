@@ -21,7 +21,7 @@ public class ChatWithGetData
 {
     static FirebaseFirestore db;
 
-    static void user(String username)
+    static int user(String username)
     {
         db = FirebaseFirestore.getInstance();
 
@@ -62,5 +62,7 @@ public class ChatWithGetData
                 }
             }
         });
+
+        return 1;
     }
 }

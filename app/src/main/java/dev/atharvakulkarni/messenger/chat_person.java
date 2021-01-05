@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -36,8 +38,8 @@ public class chat_person extends AppCompatActivity
 {
     EditText message_edittext;
     FrameLayout send;
-    String message, username;
-    TextView chat_with;
+    String message, chatwith_username;
+    TextView chat_with, on_off_status;
     FirebaseFirestore db;
     private String saveCurrentTime, saveCurrentDate;
     private ChatPersonAdapter chatPersonAdapter;
@@ -56,6 +58,8 @@ public class chat_person extends AppCompatActivity
         message_edittext = findViewById(R.id.editText_message);
         chat_with = findViewById(R.id.chat_with);
         send = findViewById(R.id.send);
+        on_off_status = findViewById(R.id.on_off_status);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -66,17 +70,61 @@ public class chat_person extends AppCompatActivity
 
        // messageSenderId = mAuth.getCurrentUser().getUid();
 
-       // username = getIntent().getExtras().getString("username");
+        chatwith_username = getIntent().getExtras().getString("username");
+
+       /* int x = ChatWithGetData.user(username);
+
+        if(x == 1)
+        {
+            chat_with.setText(ChatWithModel.getName());
+        }*/
+
+        DocumentReference docRef = db.collection("users").document(chatwith_username);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()
+        {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task)
+            {
+                if (task.isSuccessful())
+                {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists())
+                    {
+                        String name = document.getString("name");
+                        String last_seen = document.getString("last_seen");
+                        String on_off_stat = document.getString("on_off_status");
+                        String photo = document.getString("photo");
+                        String status = document.getString("status");
+
+                        ChatWithModel.setLast_seen(last_seen);
+                        ChatWithModel.setOn_off_status(on_off_stat);
+                        ChatWithModel.setStatus(status);
+                        ChatWithModel.setName(name);
+                        ChatWithModel.setPhoto(photo);
+                        ChatWithModel.setUsername(chatwith_username);
+
+                        // Toast.makeText(context, ChatWithModel.getUsername(), Toast.LENGTH_SHORT).show();
 
 
+                        chat_with.setText(name);
+                        on_off_status.setText(on_off_stat);
 
-        ChatWithGetData.user(username);
 
-        chat_with.setText(ChatWithModel.getName());
+                        Log.d("TAG", "DocumentSnapshot data1111: " + document.getData());
+                    }
+                    else
+                    {
+                        Log.d("TAG", "No such document");
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
 
-        Toast.makeText(this,UserModel.getUsername()+"   "+ ChatWithModel.getUsername(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this,UserModel.getUsername()+"   "+ chatwith_username, Toast.LENGTH_SHORT).show();
 
-        ChatWithModel.setUsername(username);
+        //ChatWithModel.setUsername(username);
 
         send.setOnClickListener(new View.OnClickListener()
         {
@@ -89,7 +137,7 @@ public class chat_person extends AppCompatActivity
 
         DisplayLastSeen();
 
-       db.collection(UserModel.getUsername()).document("person").collection(ChatWithModel.getUsername())
+       db.collection(UserModel.getUsername()).document("person").collection(chatwith_username)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
                 {
@@ -160,7 +208,7 @@ public class chat_person extends AppCompatActivity
             msg.put("text", message);
 
             // Add a new document with a generated ID
-            db.collection(UserModel.getUsername()).document("person").collection(ChatWithModel.getUsername()).document(String.valueOf(System.currentTimeMillis())).set(msg).addOnSuccessListener(new OnSuccessListener<Void>()
+            db.collection(UserModel.getUsername()).document("person").collection(chatwith_username).document(String.valueOf(System.currentTimeMillis())).set(msg).addOnSuccessListener(new OnSuccessListener<Void>()
                     {
                         private static final String TAG = "a";
 
@@ -188,11 +236,13 @@ public class chat_person extends AppCompatActivity
 
 
             Map<String, Object> msg1 = new HashMap<>();
+            msg1.put("name",ChatWithModel.getName());
+            msg1.put("photo",ChatWithModel.getPhoto());
             msg1.put("last_message", message);
             msg1.put("last_time", saveCurrentTime);
 
             // Add a new document with a generated ID
-            db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist").document(ChatWithModel.getUsername()).set(msg1).addOnSuccessListener(new OnSuccessListener<Void>()
+            db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist").document(chatwith_username).set(msg1).addOnSuccessListener(new OnSuccessListener<Void>()
             {
                 private static final String TAG = "a";
 
