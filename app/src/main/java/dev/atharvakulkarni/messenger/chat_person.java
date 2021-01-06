@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -60,7 +61,6 @@ public class chat_person extends AppCompatActivity
         send = findViewById(R.id.send);
         on_off_status = findViewById(R.id.on_off_status);
 
-
         mAuth = FirebaseAuth.getInstance();
 
         // Access a Cloud Firestore instance from your Activity
@@ -79,6 +79,31 @@ public class chat_person extends AppCompatActivity
             chat_with.setText(ChatWithModel.getName());
         }*/
 
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
+
+        x();
+
+       // Toast.makeText(this,UserModel.getUsername()+"   "+ chatwith_username, Toast.LENGTH_SHORT).show();
+
+        //ChatWithModel.setUsername(username);
+
+        send.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                SendMessage();
+            }
+        });
+
+        DisplayLastSeen();
+    }
+
+    void x()
+    {
         DocumentReference docRef = db.collection("users").document(chatwith_username);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()
         {
@@ -122,22 +147,8 @@ public class chat_person extends AppCompatActivity
             }
         });
 
-       // Toast.makeText(this,UserModel.getUsername()+"   "+ chatwith_username, Toast.LENGTH_SHORT).show();
 
-        //ChatWithModel.setUsername(username);
-
-        send.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                SendMessage();
-            }
-        });
-
-        DisplayLastSeen();
-
-       db.collection(UserModel.getUsername()).document("person").collection(chatwith_username)
+        db.collection(UserModel.getUsername()).document("person").collection(chatwith_username)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
                 {
@@ -219,6 +230,8 @@ public class chat_person extends AppCompatActivity
                             Toast.makeText(chat_person.this, "success", Toast.LENGTH_SHORT).show();
                             message_edittext.setText("");
                             chatPersonAdapter.notifyDataSetChanged();
+
+                            x();
 
                             //onStart();
                         }
