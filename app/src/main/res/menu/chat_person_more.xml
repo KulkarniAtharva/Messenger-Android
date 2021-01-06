@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/view_contact"
+        android:icon="@drawable/email"
+        android:title="View Contact"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/search"
+        android:title="Search"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/more"
+        android:title="More"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/report"
+                android:title="Report" />
+            <item
+                android:id="@+id/block"
+                android:title="Block" />
+            <item
+                android:id="@+id/clear_chat"
+                android:title="Clear chat" />
+            <item
+                android:id="@+id/add_shortcut"
+                android:title="Add shortcut" />
+        </menu>
+    </item>
+</menu>

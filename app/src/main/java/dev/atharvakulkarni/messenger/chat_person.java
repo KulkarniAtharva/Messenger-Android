@@ -3,6 +3,9 @@ package dev.atharvakulkarni.messenger;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -84,9 +87,11 @@ public class chat_person extends AppCompatActivity
                 .build();
         db.setFirestoreSettings(settings);
 
+        chatPersonAdapter.notifyDataSetChanged();
+
         x();
 
-       // Toast.makeText(this,UserModel.getUsername()+"   "+ chatwith_username, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this,UserModel.getUsername()+"   "+ chadwick_username, Toast.LENGTH_SHORT).show();
 
         //ChatWithModel.setUsername(username);
 
@@ -173,6 +178,44 @@ public class chat_person extends AppCompatActivity
                         }
                     }
                 });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.chat_person_more, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.view_contact:
+                Toast.makeText(this, "Item 1 selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.search:
+                Toast.makeText(this, "Item 2 selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.more:
+                Toast.makeText(this, "Item 3 selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.report:
+                Toast.makeText(this, "Sub Item 1 selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.block:
+                Toast.makeText(this, "Sub Item 2 selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.clear_chat:
+                Toast.makeText(this, "Sub Item 2 selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.add_shortcut:
+                Toast.makeText(this, "Sub Item 2 selected", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void IntializeControllers()
