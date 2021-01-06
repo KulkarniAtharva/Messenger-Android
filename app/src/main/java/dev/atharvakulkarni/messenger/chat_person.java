@@ -236,13 +236,47 @@ public class chat_person extends AppCompatActivity
 
 
             Map<String, Object> msg1 = new HashMap<>();
-            msg1.put("name",ChatWithModel.getName());
-            msg1.put("photo",ChatWithModel.getPhoto());
-            msg1.put("last_message", message);
-            msg1.put("last_time", saveCurrentTime);
+            msg1.put("from", UserModel.getUsername());
+            msg1.put("time", saveCurrentTime);
+            msg1.put("date", saveCurrentDate);
+            msg1.put("text", message);
 
             // Add a new document with a generated ID
-            db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist").document(chatwith_username).set(msg1).addOnSuccessListener(new OnSuccessListener<Void>()
+            db.collection(chatwith_username).document("person").collection(UserModel.getUsername()).document(String.valueOf(System.currentTimeMillis())).set(msg1).addOnSuccessListener(new OnSuccessListener<Void>()
+            {
+                private static final String TAG = "a";
+
+                @Override
+                public void onSuccess(Void aVoid)
+                {
+                    //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    Toast.makeText(chat_person.this, "success", Toast.LENGTH_SHORT).show();
+                    message_edittext.setText("");
+                    chatPersonAdapter.notifyDataSetChanged();
+
+                    //onStart();
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener()
+                    {
+                        private static final String TAG = "b";
+
+                        @Override
+                        public void onFailure(@NonNull Exception e)
+                        {
+                            Log.w(TAG, "Error adding document", e);
+                        }
+                    });
+
+
+            Map<String, Object> msg2 = new HashMap<>();
+            msg2.put("name",ChatWithModel.getName());
+            msg2.put("photo",ChatWithModel.getPhoto());
+            msg2.put("last_message", message);
+            msg2.put("last_time", saveCurrentTime);
+
+            // Add a new document with a generated ID
+            db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist").document(chatwith_username).set(msg2).addOnSuccessListener(new OnSuccessListener<Void>()
             {
                 private static final String TAG = "a";
 
@@ -289,8 +323,6 @@ public class chat_person extends AppCompatActivity
                     {
                        // message_textview.setText();
 
-
-
                         Messages1 messages = document.toObject(Messages1.class);
                         messagesList.add(messages);
                         messageAdapter.notifyDataSetChanged();
@@ -309,11 +341,5 @@ public class chat_person extends AppCompatActivity
                 }
             }
         });*/
-
-
-
-
-
-
     }
 }
