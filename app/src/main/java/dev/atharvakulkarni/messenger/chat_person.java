@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -178,13 +179,21 @@ public class chat_person extends AppCompatActivity
                         }
                     }
                 });
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.chat_person_more, menu);
+        /*MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.chat_person_more, menu);*/
+
+
+        getMenuInflater().inflate(R.menu.chat_person_more, menu);
+
         return true;
     }
     @Override

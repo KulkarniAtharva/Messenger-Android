@@ -2,10 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/view_contact"
-        android:icon="@drawable/email"
-        android:title="View Contact"
+        android:id="@+id/video_call"
+        android:icon="@drawable/video_call"
+        android:title="Video call"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/call"
+        android:icon="@drawable/call"
+        android:title="Call"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/view_contact"
+        android:title="View Contact" />
     <item
         android:id="@+id/search"
         android:title="Search"
