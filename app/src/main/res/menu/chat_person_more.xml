@@ -19,6 +19,9 @@
         android:title="Search"
         app:showAsAction="never" />
     <item
+        android:id="@+id/wallpaer"
+        android:title="Wallpaper" />
+    <item
         android:id="@+id/more"
         android:title="More"
         app:showAsAction="never">

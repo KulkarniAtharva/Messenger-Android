@@ -11,17 +11,51 @@
        android:layout_marginTop="10dp" />  -->
 
     <TextView
-        android:id="@+id/receiver_message_text"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:layout_alignParentTop = "true"
         android:layout_marginTop = "10dp"
         android:layout_marginStart = "3dp"
-        android:text = "receiver messages"
         android:padding = "10dp"
         android:textSize = "14sp"
         android:textStyle = "bold"
-        android:textColor = "@android:color/black" />
+        android:textColor = "@android:color/black"
+        android:visibility="gone"/>
+
+  <TextView
+      android:id="@+id/time_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/grey"
+      android:textSize="8sp"
+      android:text=""
+      android:layout_centerVertical="true"
+      android:layout_toRightOf="@id/receiver_message_text"
+      />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/receiver_message_text"
+      android:layout_centerVertical="true"
+      android:lineSpacingExtra="2dp"
+      android:paddingLeft="20dp"
+      android:paddingTop="4dp"
+      android:paddingRight="30dp"
+      android:paddingBottom="10dp"
+      android:text="Hi, How are you?"
+      android:textColor="@color/black"
+      android:textSize="14sp"
+      android:background="@drawable/background_left"/>
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/txt_seen"
+      android:visibility="gone"
+      android:textColor="@color/white"
+      android:textSize="14sp"
+      android:layout_below="@id/receiver_message_text"/>
 
     <!--<ImageView
         android:id = "@+id/message_sender_image_view"
@@ -41,7 +75,6 @@
         android:scaleType = "centerCrop" />   -->
 
     <TextView
-        android:id = "@+id/sender_message_text"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:layout_alignParentEnd = "true"
@@ -51,6 +84,44 @@
         android:textSize="14sp"
         android:padding="10dp"
         android:textStyle="bold"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:visibility="gone"/>
+
+  <TextView
+      android:id="@+id/time_t"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/grey"
+      android:textSize="8sp"
+      android:text=""
+      android:layout_centerVertical="true"
+      android:layout_toLeftOf="@id/sender_message_text" />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="@drawable/background_right"
+      android:layout_alignParentEnd="true"
+      android:id="@+id/sender_message_text"
+      android:lineSpacingExtra="2dp"
+      android:paddingLeft="20dp"
+      android:paddingTop="4dp"
+      android:paddingRight="20dp"
+      android:paddingBottom="10dp"
+      android:text="Hi, How are you?"
+      android:textColor="@color/white"
+      android:textSize="14sp"
+      android:layout_alignParentRight="true" />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/txt_see"
+      android:textColor="@color/white"
+      android:textSize="14sp"
+      android:layout_marginRight="15dp"
+      android:layout_below="@id/sender_message_text"
+      android:layout_alignParentRight="true"
+      android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
