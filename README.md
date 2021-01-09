@@ -53,7 +53,7 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - QR Scanner Connect Friend
 
 
-## Built With
+## Built With  🛠
 
 - Android - JAVA
 - Firebase
@@ -64,6 +64,8 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - Room Database
 - MVVM Architecture
 - RxJava
+- LiveData
+- View Model
 - RecyclerView
 - Picasso/Glide
 
