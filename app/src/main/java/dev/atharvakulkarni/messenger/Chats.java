@@ -56,6 +56,7 @@ public class Chats extends Fragment
         // recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
         // custom adapters always populate the recycler view with items
+
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
@@ -63,36 +64,54 @@ public class Chats extends Fragment
         chatsAdapter = new ChatsAdapter(getContext(),recyclerView,list);
         recyclerView.setAdapter(chatsAdapter);
 
+
+       // getData();
+
+        return view;
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        list.clear();
+        chatsAdapter.notifyDataSetChanged();
+
+        getData();
+    }
+
+    void getData()
+    {
         db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
-                                       {
-                                           @Override
-                                           public void onComplete(@NonNull Task<QuerySnapshot> task)
-                                           {
-                                               if(task.isSuccessful())
-                                               {
-                                                   for(QueryDocumentSnapshot document : task.getResult())
-                                                   {
-                                                       Log.d("TAG", document.getId() + " => " + document.getData());
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task)
+                    {
+                        if(task.isSuccessful())
+                        {
+                            for(QueryDocumentSnapshot document : task.getResult())
+                            {
+                                Log.d("TAG", document.getId() + " => " + document.getData());
 
-                                                       String names = document.getString("name");
-                                                       String photo = document.getString("photo");
-                                                       String last_message = document.getString("last_message");
-                                                       String last_time = document.getString("last_time");
+                                String names = document.getString("name");
+                                String photo = document.getString("photo");
+                                String last_message = document.getString("last_message");
+                                String last_time = document.getString("last_time");
 
-                                                       ChatlistModel model = new ChatlistModel(document.getId(),names,photo,last_message,"1",last_time);
+                                ChatlistModel model = new ChatlistModel(document.getId(),names,photo,last_message,"1",last_time);
 
-                                                       if(names != null)
-                                                           list.add(model);
-                                                       else
-                                                           Toast.makeText(getContext(), "No Chats", Toast.LENGTH_SHORT).show();
+                                if(names != null)
+                                    list.add(model);
+                                else
+                                    Toast.makeText(getContext(), "No Chats", Toast.LENGTH_SHORT).show();
 
-                                                       chatsAdapter.notifyDataSetChanged();
-                                                   }
-                                               }
-                                           }
-                                       });
-        return view;
+                                chatsAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+                });
     }
 }
