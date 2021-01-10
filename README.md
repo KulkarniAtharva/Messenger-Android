@@ -66,8 +66,8 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - [Java]() - Best & Most used programming language for Android development.
 - Firebase
    - [Firebase Authentication](https://firebase.google.com/docs/auth) - Kowing the identity of the user to securely store the user data in the cloud and provide the same personalized experience across all of the user's devices
-   - [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore) - To keep data in sync across client apps
-   - [Firebase Storage]() - 
+   - [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore) - To store data & keep it in sync across client apps & provide offline support
+   - [Firebase Storage](https://firebase.google.com/docs/storage) - A storage service to store images, files, videos, audio
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
   - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Data objects that notify views when the underlying database changes.
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes. 
