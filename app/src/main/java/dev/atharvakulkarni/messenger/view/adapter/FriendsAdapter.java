@@ -1,4 +1,4 @@
-package dev.atharvakulkarni.messenger;
+package dev.atharvakulkarni.messenger.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import dev.atharvakulkarni.messenger.R;
+import dev.atharvakulkarni.messenger.service.model.UserModel;
+import dev.atharvakulkarni.messenger.view.ui.chat_person;
 
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHolder>
 {
@@ -121,7 +123,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
                                 }
                             });
 
-                    Intent intent = new Intent(context,chat_person.class);
+                    Intent intent = new Intent(context, chat_person.class);
                     intent.putExtra("username",usernames.get(position));
                     context.startActivity(intent);
 

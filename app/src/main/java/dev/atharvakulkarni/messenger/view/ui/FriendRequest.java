@@ -1,18 +1,14 @@
-package dev.atharvakulkarni.messenger;
+package dev.atharvakulkarni.messenger.view.ui;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,9 +22,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.atharvakulkarni.messenger.databinding.ChatsBinding;
+import dev.atharvakulkarni.messenger.R;
 import dev.atharvakulkarni.messenger.databinding.FriendRequestBinding;
-import dev.atharvakulkarni.messenger.databinding.FriendsBinding;
+import dev.atharvakulkarni.messenger.service.model.UserModel;
+import dev.atharvakulkarni.messenger.service.model.Users_FriendRequest_Model;
+import dev.atharvakulkarni.messenger.view.adapter.FriendRequestAdapter;
 
 public class FriendRequest extends AppCompatActivity
 {
@@ -45,7 +43,7 @@ public class FriendRequest extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        friendRequestBinding = DataBindingUtil.setContentView(this,R.layout.friend_request);
+        friendRequestBinding = DataBindingUtil.setContentView(this, R.layout.friend_request);
 
        // friendRequestBinding = DataBindingUtil.inflate(inflater, R.layout.friend_request, container, false);
        // View view = friendRequestBinding.getRoot();

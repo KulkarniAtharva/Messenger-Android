@@ -1,7 +1,8 @@
-package dev.atharvakulkarni.messenger;
+package dev.atharvakulkarni.messenger.view.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,8 +29,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
+import dev.atharvakulkarni.messenger.R;
+import dev.atharvakulkarni.messenger.UserGetData;
+import dev.atharvakulkarni.messenger.service.model.LoginModel;
+import dev.atharvakulkarni.messenger.service.model.UserModel;
 import dev.atharvakulkarni.messenger.databinding.SigninSignupBinding;
+import dev.atharvakulkarni.messenger.viewmodel.SignIn_SignUpViewModel;
 
 public class signin_signup extends AppCompatActivity
 {
@@ -36,10 +45,10 @@ public class signin_signup extends AppCompatActivity
     TextView signin,signup;
     TextInputEditText signin_username_edittext,signin_password_edittext,name_edittext,signup_username_edittext,signup_password_edittext,signup_reenterpassword_edittext;
     SigninSignupBinding signinSignupBinding;
-    // SignInSignUpViewModel signInSignUpViewModel;
     private FirebaseAuth mAuth;
     String username,password,name,reenterpassword, saveCurrentTime, saveCurrentDate;
     FirebaseFirestore db;
+    SignIn_SignUpViewModel signIn_signUpViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -47,22 +56,48 @@ public class signin_signup extends AppCompatActivity
         super.onCreate(savedInstanceState);
         signinSignupBinding = DataBindingUtil.setContentView(this, R.layout.signin_signup);
 
-        signin_page = signinSignupBinding.signinPage;
-        signup_page = signinSignupBinding.signupPage;
-        continue_btn = signinSignupBinding.continueButton;
-        signup_button = signinSignupBinding.signupbutton;
-        signin = signinSignupBinding.signin;
-        signup = signinSignupBinding.signup;
-        signin_username_edittext = signinSignupBinding.username;
-        signin_password_edittext = signinSignupBinding.password;
-        signup_username_edittext = signinSignupBinding.username2;
-        signup_password_edittext = signinSignupBinding.password2;
-        name_edittext = signinSignupBinding.name;
-        signup_reenterpassword_edittext = signinSignupBinding.reenterPassword;
+        signinSignupBinding.setLifecycleOwner(this);
 
-        db = FirebaseFirestore.getInstance();
+       // signinSignupBinding.setLoginViewModel(loginViewModel);
 
-        mAuth = FirebaseAuth.getInstance();
+
+        SignIn_SignUpViewModel.getUser().observe(this, new Observer<LoginModel>()
+        {
+            @Override
+            public void onChanged(@Nullable LoginModel loginUser)
+            {
+
+                if (TextUtils.isEmpty(Objects.requireNonNull(loginUser).getStrEmailAddress()))
+                {
+                    signinSignupBinding.txtEmailAddress.setError("Enter an E-Mail Address");
+                    signinSignupBinding.txtEmailAddress.requestFocus();
+                }
+                else if (!loginUser.isEmailValid())
+                {
+                    signinSignupBinding.txtEmailAddress.setError("Enter a Valid E-mail Address");
+                    signinSignupBinding.txtEmailAddress.requestFocus();
+                }
+                else if (TextUtils.isEmpty(Objects.requireNonNull(loginUser).getStrPassword())) {
+                    signinSignupBinding.txtPassword.setError("Enter a Password");
+                    signinSignupBinding.txtPassword.requestFocus();
+                }
+                else if (!loginUser.isPasswordLengthGreaterThan5()) {
+                    signinSignupBinding.txtPassword.setError("Enter at least 6 Digit password");
+                    signinSignupBinding.txtPassword.requestFocus();
+                }
+                else {
+                    signinSignupBinding.lblEmailAnswer.setText(loginUser.getStrEmailAddress());
+                    signinSignupBinding.lblPasswordAnswer.setText(loginUser.getStrPassword());
+                }
+
+            }
+        });
+
+
+
+
+        init();
+
       //  messageSenderId = mAuth.getCurrentUser().getUid();
 
         getWindow().setStatusBarColor(getResources().getColor(R.color.white,getTheme()));
@@ -125,6 +160,29 @@ public class signin_signup extends AppCompatActivity
                 signup_page.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    private void init()
+    {
+        signin_page = signinSignupBinding.signinPage;
+        signup_page = signinSignupBinding.signupPage;
+        continue_btn = signinSignupBinding.continueButton;
+        signup_button = signinSignupBinding.signupbutton;
+        signin = signinSignupBinding.signin;
+        signup = signinSignupBinding.signup;
+        signin_username_edittext = signinSignupBinding.username;
+        signin_password_edittext = signinSignupBinding.password;
+        signup_username_edittext = signinSignupBinding.username2;
+        signup_password_edittext = signinSignupBinding.password2;
+        name_edittext = signinSignupBinding.name;
+        signup_reenterpassword_edittext = signinSignupBinding.reenterPassword;
+
+        db = FirebaseFirestore.getInstance();
+
+        mAuth = FirebaseAuth.getInstance();
+
+        signIn_signUpViewModel = new ViewModelProvider(this).get(SignIn_SignUpViewModel.class);
+        signIn_signUpViewModel.init();
     }
 
     private String getCurrentDateTime()

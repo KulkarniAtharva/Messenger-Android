@@ -1,10 +1,9 @@
-package dev.atharvakulkarni.messenger;
+package dev.atharvakulkarni.messenger.view.ui;
 
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -38,6 +37,12 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import dev.atharvakulkarni.messenger.view.adapter.ChatPersonAdapter;
+import dev.atharvakulkarni.messenger.service.model.ChatWithModel;
+import dev.atharvakulkarni.messenger.service.model.MessagesModel;
+import dev.atharvakulkarni.messenger.R;
+import dev.atharvakulkarni.messenger.service.model.UserModel;
 
 public class chat_person extends AppCompatActivity
 {

@@ -1,8 +1,8 @@
-package dev.atharvakulkarni.messenger;
+package dev.atharvakulkarni.messenger.service.model;
 
 public class ChatlistModel
 {
-    String username, name,photo, lastmessage, count, last_time;
+    public String username, name,photo, lastmessage, count, last_time;
 
     public ChatlistModel(String username, String name, String photo, String lastmessage, String count, String last_time)
     {

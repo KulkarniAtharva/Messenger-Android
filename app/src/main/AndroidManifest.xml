@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.ui.MainActivity">
 
         </activity>
-        <activity android:name=".signin_signup">
+        <activity android:name=".view.ui.signin_signup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".chat_person"/>
-        <activity android:name=".FriendRequest"/>
+        <activity android:name=".view.ui.chat_person"/>
+        <activity android:name=".view.ui.FriendRequest"/>
     </application>
 </manifest>

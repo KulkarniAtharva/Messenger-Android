@@ -1,18 +1,18 @@
-package dev.atharvakulkarni.messenger;
+package dev.atharvakulkarni.messenger.view.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import dev.atharvakulkarni.messenger.R;
+import dev.atharvakulkarni.messenger.service.model.UserModel;
 
 public class MainActivity extends AppCompatActivity
 {

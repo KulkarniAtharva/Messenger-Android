@@ -1,8 +1,6 @@
-package dev.atharvakulkarni.messenger;
+package dev.atharvakulkarni.messenger.service.model;
 
-import android.widget.Toast;
-
-public class UserModel
+public class ChatWithModel
 {
     private static String username, name,photo,on_off_status,last_seen,status;
 
@@ -11,7 +9,7 @@ public class UserModel
     }
 
     public static void setOn_off_status(String on_off_status) {
-        UserModel.on_off_status = on_off_status;
+        ChatWithModel.on_off_status = on_off_status;
     }
 
     public static String getLast_seen() {
@@ -19,7 +17,7 @@ public class UserModel
     }
 
     public static void setLast_seen(String last_seen) {
-        UserModel.last_seen = last_seen;
+        ChatWithModel.last_seen = last_seen;
     }
 
     public static String getStatus() {
@@ -27,7 +25,7 @@ public class UserModel
     }
 
     public static void setStatus(String status) {
-        UserModel.status = status;
+        ChatWithModel.status = status;
     }
 
     public static String getName()
@@ -37,7 +35,7 @@ public class UserModel
 
     public static void setName(String name)
     {
-        UserModel.name = name;
+        ChatWithModel.name = name;
     }
 
     public static String getPhoto()
@@ -47,10 +45,10 @@ public class UserModel
 
     public static void setPhoto(String photo)
     {
-        UserModel.photo = photo;
+        ChatWithModel.photo = photo;
     }
 
-    public UserModel()
+    public ChatWithModel()
     {
     }
 
@@ -61,6 +59,6 @@ public class UserModel
 
     public static void setUsername(String username)
     {
-        UserModel.username = username;
+        ChatWithModel.username = username;
     }
 }

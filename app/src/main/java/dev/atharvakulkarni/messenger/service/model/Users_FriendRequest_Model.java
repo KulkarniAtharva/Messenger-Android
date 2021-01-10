@@ -1,4 +1,4 @@
-package dev.atharvakulkarni.messenger;
+package dev.atharvakulkarni.messenger.service.model;
 
 public class Users_FriendRequest_Model
 {

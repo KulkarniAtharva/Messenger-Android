@@ -1,4 +1,4 @@
-package dev.atharvakulkarni.messenger;
+package dev.atharvakulkarni.messenger.view.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +20,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import dev.atharvakulkarni.messenger.R;
+import dev.atharvakulkarni.messenger.service.model.UserModel;
+import dev.atharvakulkarni.messenger.service.model.Users_FriendRequest_Model;
 
 public class FriendRequestAdapter extends RecyclerView.Adapter
 {

@@ -1,4 +1,4 @@
-package dev.atharvakulkarni.messenger;
+package dev.atharvakulkarni.messenger.view.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,9 +23,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import dev.atharvakulkarni.messenger.databinding.ChatsBinding;
+import dev.atharvakulkarni.messenger.view.adapter.FriendsAdapter;
+import dev.atharvakulkarni.messenger.R;
+import dev.atharvakulkarni.messenger.service.model.UserModel;
 import dev.atharvakulkarni.messenger.databinding.FriendsBinding;
 
 public class Friends extends Fragment

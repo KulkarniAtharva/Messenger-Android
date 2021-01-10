@@ -1,4 +1,4 @@
-package dev.atharvakulkarni.messenger;
+package dev.atharvakulkarni.messenger.view.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -14,6 +14,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
+
+import dev.atharvakulkarni.messenger.service.model.MessagesModel;
+import dev.atharvakulkarni.messenger.R;
+import dev.atharvakulkarni.messenger.service.model.UserModel;
 
 public class ChatPersonAdapter extends RecyclerView.Adapter<ChatPersonAdapter.MessageViewHolder>
 {

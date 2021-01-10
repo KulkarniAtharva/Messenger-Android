@@ -1,24 +1,20 @@
-package dev.atharvakulkarni.messenger;
+package dev.atharvakulkarni.messenger.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import dev.atharvakulkarni.messenger.R;
+import dev.atharvakulkarni.messenger.service.model.ChatlistModel;
+import dev.atharvakulkarni.messenger.view.ui.chat_person;
 
 /*public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
 {
@@ -215,7 +211,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
                 {
                     int position = recyclerView.getChildLayoutPosition(view);
 
-                    Intent intent = new Intent(context,chat_person.class);
+                    Intent intent = new Intent(context, chat_person.class);
 
 
 
