@@ -55,21 +55,20 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 
 ## Built With  🛠
 
-- Firebase
-   - Firebase Authentication
-   - Firebase Cloud Firestore
-   - Firebase Storage
+
 - Databinding
-- Room Database
 - MVVM Architecture
-- RxJava
-- RecyclerView
 - Picasso/Glide
 
 
 
 ## Built With 🛠
 - [Java]() - Best & Most used programming language for Android development.
+- Firebase
+   - Firebase Authentication
+   - Firebase Cloud Firestore
+   - Firebase Storage
+   
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
   - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Data objects that notify views when the underlying database changes.
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes. 
@@ -77,6 +76,9 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - [Koin/ Dagger2](https://insert-koin.io) - Dependency Injection Framework
 - [Glide](https://github.com/bumptech/glide) - An image loading and caching library for Android focused on smooth scrolling.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
+- Room Database
+- RxJava
+- RecyclerView
 
 ## Future Additions
 
