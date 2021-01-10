@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -182,6 +183,15 @@ public class signin_signup extends AppCompatActivity
        // signIn_signUpViewModel = ViewModelProvider.of(this).get(SignIn_SignUpViewModel.class);
         signInViewModel = new ViewModelProvider(this,new SignInViewModelFactory(this,new UserModel())).get(SignInViewModel.class);
         signinBinding.setUserModel(signInViewModel);
+
+        signInViewModel.getUser().observe(this, new Observer<UserModel>()
+        {
+            @Override
+            public void onChanged(UserModel userModel)
+            {
+
+            }
+        });
         //signIn_signUpViewModel.init();
     }
 

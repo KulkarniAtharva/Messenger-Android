@@ -14,16 +14,16 @@ public class SignInViewModel extends ViewModel
     public MutableLiveData<String> username = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
 
-   /* static private MutableLiveData<LoginModel> userMutableLiveData;
+    static private MutableLiveData<UserModel> userMutableLiveData;
 
-    public static MutableLiveData<LoginModel> getUser()
+    public MutableLiveData<UserModel> getUser()
     {
         if (userMutableLiveData == null)
         {
             userMutableLiveData = new MutableLiveData<>();
         }
         return userMutableLiveData;
-    }*/
+    }
 
     public UserModel userModel;
     private Context context;

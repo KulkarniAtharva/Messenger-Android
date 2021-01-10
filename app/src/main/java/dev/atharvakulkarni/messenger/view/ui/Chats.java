@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,12 +23,16 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dev.atharvakulkarni.messenger.service.model.ChatlistModel;
+import dev.atharvakulkarni.messenger.view.ViewModelFactory.SignInViewModelFactory;
 import dev.atharvakulkarni.messenger.view.adapter.ChatsAdapter;
 import dev.atharvakulkarni.messenger.R;
 import dev.atharvakulkarni.messenger.service.model.UserModel;
 import dev.atharvakulkarni.messenger.databinding.ChatsBinding;
+import dev.atharvakulkarni.messenger.viewmodel.ChatsViewModel;
+import dev.atharvakulkarni.messenger.viewmodel.SignInViewModel;
 
 public class Chats extends Fragment
 {
@@ -36,6 +42,7 @@ public class Chats extends Fragment
     FirebaseFirestore db;
     ChatsAdapter chatsAdapter;
     ArrayList<ChatlistModel> list = new ArrayList();
+    ChatsViewModel chatsViewModel;
 
     @Nullable
     @Override
@@ -46,25 +53,31 @@ public class Chats extends Fragment
 
         recyclerView = chatsBinding.recyclerView;
 
-        db = FirebaseFirestore.getInstance();
-
-       /* FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setPersistenceEnabled(true)
-                .build();
-        db.setFirestoreSettings(settings);*/
-
         recyclerView.setVisibility(View.VISIBLE);
 
         // recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
         // custom adapters always populate the recycler view with items
 
+        chatsViewModel = new ViewModelProvider(this).get(ChatsViewModel.class);
+        chatsViewModel.init();
+        chatsViewModel.getChatlistmodel().observe(this, new Observer<List<ChatlistModel>>()
+        {
+            @Override
+            public void onChanged(List<ChatlistModel> chatlistModels)
+            {
+                Toast.makeText(getContext(), "yoooo", Toast.LENGTH_SHORT).show();
+                chatsAdapter.notifyDataSetChanged();
+            }
+        });
+
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        chatsAdapter = new ChatsAdapter(getContext(),recyclerView,list);
+        chatsAdapter = new ChatsAdapter(getContext(),recyclerView,chatsViewModel.getChatlistmodel().getValue());
         recyclerView.setAdapter(chatsAdapter);
+
 
 
        // getData();
@@ -78,42 +91,13 @@ public class Chats extends Fragment
         super.onResume();
 
         list.clear();
-        chatsAdapter.notifyDataSetChanged();
+       // chatsAdapter.notifyDataSetChanged();
 
         getData();
     }
 
     void getData()
     {
-        db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
-                {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task)
-                    {
-                        if(task.isSuccessful())
-                        {
-                            for(QueryDocumentSnapshot document : task.getResult())
-                            {
-                                Log.d("TAG", document.getId() + " => " + document.getData());
 
-                                String names = document.getString("name");
-                                String photo = document.getString("photo");
-                                String last_message = document.getString("last_message");
-                                String last_time = document.getString("last_time");
-
-                                ChatlistModel model = new ChatlistModel(document.getId(),names,photo,last_message,"1",last_time);
-
-                                if(names != null)
-                                    list.add(model);
-                                else
-                                    Toast.makeText(getContext(), "No Chats", Toast.LENGTH_SHORT).show();
-
-                                chatsAdapter.notifyDataSetChanged();
-                            }
-                        }
-                    }
-                });
     }
 }
