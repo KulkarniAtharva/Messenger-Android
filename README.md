@@ -65,7 +65,7 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 ## Built With 🛠
 - [Java]() - Best & Most used programming language for Android development.
 - Firebase
-   - Firebase Authentication
+   - [Firebase Authentication](https://firebase.google.com/docs/auth) - Kowing the identity of the user to securely store the user data in the cloud and provide the same personalized experience across all of the user's devices
    - Firebase Cloud Firestore
    - Firebase Storage
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
