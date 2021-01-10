@@ -36,7 +36,7 @@ public class ChatsRepository
 
     public MutableLiveData<List<ChatlistModel>> getChats()
     {
-        dataset.clear();
+        //dataset.clear();
         db = FirebaseFirestore.getInstance();
         setChats();
 

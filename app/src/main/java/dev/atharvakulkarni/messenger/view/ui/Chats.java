@@ -90,7 +90,7 @@ public class Chats extends Fragment
     {
         super.onResume();
 
-        list.clear();
+      //  list.clear();
        // chatsAdapter.notifyDataSetChanged();
 
         getData();
