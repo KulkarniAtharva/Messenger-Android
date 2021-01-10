@@ -55,19 +55,29 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 
 ## Built With  🛠
 
-- Android - JAVA
+
+- Databinding
+- MVVM Architecture
+- Picasso/Glide
+
+
+
+## Built With 🛠
+- [Java]() - Best & Most used programming language for Android development.
 - Firebase
    - Firebase Authentication
    - Firebase Cloud Firestore
    - Firebase Storage
-- Databinding
+- [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
+  - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Data objects that notify views when the underlying database changes.
+  - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes. 
+  - [ViewBinding](https://developer.android.com/topic/libraries/view-binding) - Generates a binding class for each XML layout file present in that module and allows you to more easily write code that interacts with views.
+- [Koin/ Dagger2](https://insert-koin.io) - Dependency Injection Framework
+- [Glide](https://github.com/bumptech/glide) - An image loading and caching library for Android focused on smooth scrolling.
+- [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
 - Room Database
-- MVVM Architecture
 - RxJava
-- LiveData
-- View Model
 - RecyclerView
-- Picasso/Glide
 
 ## Future Additions
 
