@@ -36,6 +36,7 @@ import dev.atharvakulkarni.messenger.UserGetData;
 import dev.atharvakulkarni.messenger.service.model.LoginModel;
 import dev.atharvakulkarni.messenger.service.model.UserModel;
 import dev.atharvakulkarni.messenger.databinding.SigninSignupBinding;
+import dev.atharvakulkarni.messenger.view.ViewModelFactory.SignInViewModelFactory;
 import dev.atharvakulkarni.messenger.viewmodel.SignIn_SignUpViewModel;
 
 public class signin_signup extends AppCompatActivity
@@ -66,7 +67,6 @@ public class signin_signup extends AppCompatActivity
             @Override
             public void onChanged(@Nullable LoginModel loginUser)
             {
-
                 if (TextUtils.isEmpty(Objects.requireNonNull(loginUser).getStrEmailAddress()))
                 {
                     signinSignupBinding.txtEmailAddress.setError("Enter an E-Mail Address");
@@ -101,8 +101,6 @@ public class signin_signup extends AppCompatActivity
       //  messageSenderId = mAuth.getCurrentUser().getUid();
 
         getWindow().setStatusBarColor(getResources().getColor(R.color.white,getTheme()));
-
-       // signInSignUpViewModel = new ViewModelProvider(this).get(SignInSignUpViewModel.class);
 
         continue_btn.setOnClickListener(new View.OnClickListener()
         {
@@ -181,8 +179,10 @@ public class signin_signup extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
 
-        signIn_signUpViewModel = new ViewModelProvider(this).get(SignIn_SignUpViewModel.class);
-        signIn_signUpViewModel.init();
+       // signIn_signUpViewModel = ViewModelProvider.of(this).get(SignIn_SignUpViewModel.class);
+        signIn_signUpViewModel = new ViewModelProvider(this,new SignInViewModelFactory(this,new UserModel())).get(SignIn_SignUpViewModel.class);
+       // signinSignupBinding = ViewModelProvider
+        //signIn_signUpViewModel.init();
     }
 
     private String getCurrentDateTime()

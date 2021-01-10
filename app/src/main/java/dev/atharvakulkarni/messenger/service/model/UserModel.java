@@ -2,7 +2,7 @@ package dev.atharvakulkarni.messenger.service.model;
 
 public class UserModel
 {
-    private static String username, name,photo,on_off_status,last_seen,status;
+    private static String username, password, name,photo,on_off_status,last_seen,status;
 
     public static String getOn_off_status() {
         return on_off_status;
