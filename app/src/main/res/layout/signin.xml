@@ -151,7 +151,9 @@
                 android:textSize="20sp"
                 android:background="@drawable/continue_background"
                 android:textColor="@color/white"
-                android:onClick="@{(v) -> UserModel.onClick(v)}"/>
+              />
+
+            <!-- android:onClick="@{(v) -> UserModel.onClick(v)}"-->
 
             <LinearLayout
                 android:layout_width="wrap_content"

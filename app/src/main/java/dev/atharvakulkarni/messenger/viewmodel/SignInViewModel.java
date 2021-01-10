@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import dev.atharvakulkarni.messenger.service.model.UserModel;

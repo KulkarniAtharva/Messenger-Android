@@ -70,6 +70,9 @@ public class chat_person extends AppCompatActivity
         send = findViewById(R.id.send);
         on_off_status = findViewById(R.id.on_off_status);
 
+
+        Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+
         mAuth = FirebaseAuth.getInstance();
 
         // Access a Cloud Firestore instance from your Activity

@@ -55,6 +55,8 @@ public class signin_signup extends AppCompatActivity
 
         signinBinding.setLifecycleOwner(this);
 
+        Toast.makeText(this, "hellloooo", Toast.LENGTH_SHORT).show();
+
        // signinSignupBinding.setLoginViewModel(loginViewModel);
 
 
@@ -98,7 +100,7 @@ public class signin_signup extends AppCompatActivity
 
         getWindow().setStatusBarColor(getResources().getColor(R.color.white,getTheme()));
 
-      /*  continue_btn.setOnClickListener(new View.OnClickListener()
+        continue_btn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -110,9 +112,11 @@ public class signin_signup extends AppCompatActivity
 
                 UserGetData.user(signin_username_edittext.getText().toString());
 
+                Toast.makeText(signin_signup.this, "nhhj", Toast.LENGTH_SHORT).show();
+
                 loginUserAccount(username,password);
             }
-        });   */
+        });
 
         signup_button.setOnClickListener(new View.OnClickListener()
         {
