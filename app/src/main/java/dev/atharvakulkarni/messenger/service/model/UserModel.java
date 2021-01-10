@@ -2,7 +2,22 @@ package dev.atharvakulkarni.messenger.service.model;
 
 public class UserModel
 {
-    private static String username, password, name,photo,on_off_status,last_seen,status;
+    private static String username;
+    private static String password;
+    private static String name;
+    private static String photo;
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static void setPassword(String password) {
+        UserModel.password = password;
+    }
+
+    private static String on_off_status;
+    private static String last_seen;
+    private static String status;
 
     public static String getOn_off_status() {
         return on_off_status;
@@ -50,6 +65,7 @@ public class UserModel
 
     public UserModel()
     {
+
     }
 
     public static String getUsername()

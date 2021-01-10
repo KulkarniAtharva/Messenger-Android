@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="LoginModel"
-            type="dev.atharvakulkarni.messenger.viewmodel.SignIn_SignUpViewModel" />
+            name="UserModel"
+            type="dev.atharvakulkarni.messenger.viewmodel.SignInViewModel" />
     </data>
 
     <LinearLayout
@@ -80,7 +80,7 @@
                     android:id="@+id/username"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black"
-                    android:text="@={LoginModel.username}"/>
+                    android:text="@={UserModel.username}"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,7 +105,7 @@
                     android:inputType="textPassword"
                     android:textColor="@color/black"
                     android:maxLines="1"
-                    android:text="@={LoginModel.password}"/>
+                    android:text="@={UserModel.password}"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,7 +136,6 @@
                 android:text="@string/forgot_password"
                 android:layout_marginStart="110dp" />
 
-
             <Button
                 android:id="@+id/continue_button"
                 android:layout_width="wrap_content"
@@ -152,7 +151,7 @@
                 android:textSize="20sp"
                 android:background="@drawable/continue_background"
                 android:textColor="@color/white"
-                android:onClick="@{() -> LoginModel.onClick()"/>
+                android:onClick="@{(v) -> UserModel.onClick(v)}"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -2,14 +2,13 @@ package dev.atharvakulkarni.messenger.viewmodel;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import dev.atharvakulkarni.messenger.service.model.LoginModel;
 import dev.atharvakulkarni.messenger.service.model.UserModel;
 
-public class SignIn_SignUpViewModel extends ViewModel
+public class SignInViewModel extends ViewModel
 {
     public MutableLiveData<String> username = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
@@ -28,7 +27,7 @@ public class SignIn_SignUpViewModel extends ViewModel
     public UserModel userModel;
     private Context context;
 
-    public SignIn_SignUpViewModel(Context context, UserModel userModel)
+    public SignInViewModel(Context context, UserModel userModel)
     {
         this.userModel = userModel;
         this.context = context;
@@ -36,7 +35,12 @@ public class SignIn_SignUpViewModel extends ViewModel
 
     public void onClick(View view)
     {
-        LoginModel loginUser = new LoginModel(username.getValue(), password.getValue());
+      //  UserModel loginUser = new UserModel(username.getValue(), password.getValue());
         //userMutableLiveData.setValue(loginUser);
+
+        UserModel.setUsername(username.getValue());
+        UserModel.setPassword(password.getValue());
+
+        Toast.makeText(context, UserModel.getUsername()+" "+UserModel.getPassword(), Toast.LENGTH_SHORT).show();
     }
 }

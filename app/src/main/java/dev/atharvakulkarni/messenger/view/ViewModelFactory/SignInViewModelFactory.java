@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import dev.atharvakulkarni.messenger.service.model.UserModel;
-import dev.atharvakulkarni.messenger.viewmodel.SignIn_SignUpViewModel;
+import dev.atharvakulkarni.messenger.viewmodel.SignInViewModel;
 
 public class SignInViewModelFactory extends ViewModelProvider.NewInstanceFactory
 {
@@ -24,6 +24,6 @@ public class SignInViewModelFactory extends ViewModelProvider.NewInstanceFactory
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass)
     {
-        return (T)new SignIn_SignUpViewModel(context,userModel);
+        return (T)new SignInViewModel(context,userModel);
     }
 }

@@ -2,12 +2,12 @@ package dev.atharvakulkarni.messenger.service.model;
 
 import android.util.Patterns;
 
-public class LoginModel
+public class LoginMode
 {
     private String strEmailAddress;
     private String strPassword;
 
-    public LoginModel(String EmailAddress, String Password)
+    public LoginMode(String EmailAddress, String Password)
     {
         strEmailAddress = EmailAddress;
         strPassword = Password;
