@@ -86,6 +86,18 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 ## 👨‍🔧 Architecture
 This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
 
+Personally, I think MVVM is the best way to structure code (in most situations). 
+
+The thing I like most about MVVM is the compartmentalization of the various components in a project. 
+
+1) The UI components are kept away from the business logic
+
+2) The business logic is kept away from the database operations
+
+3) It's easy to read (because everything has specific places to live)
+
+4) And if done correctly, you have a lot less to worry about when it comes to lifecycle events (ex: screen rotations)
+
 ![](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
 
 <BR><BR>
