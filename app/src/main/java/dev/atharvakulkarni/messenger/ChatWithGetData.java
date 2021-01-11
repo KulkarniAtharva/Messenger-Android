@@ -52,7 +52,9 @@ public class ChatWithGetData
                     {
                         Log.d("TAG", "No such document");
                     }
-                } else {
+                }
+                else
+                {
                     Log.d("TAG", "get failed with ", task.getException());
                 }
             }

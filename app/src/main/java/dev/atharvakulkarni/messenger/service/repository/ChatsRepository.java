@@ -36,8 +36,6 @@ public class ChatsRepository
 
     public MutableLiveData<List<ChatlistModel>> getChats()
     {
-        //dataset.clear();
-        db = FirebaseFirestore.getInstance();
         setChats();
 
         MutableLiveData<List<ChatlistModel>> data = new MutableLiveData<>();
@@ -47,6 +45,12 @@ public class ChatsRepository
 
     private void setChats()
     {
+       // ChatlistModel model = new ChatlistModel("Username","names","photo","last_message","1","last_time");
+       // dataset.add(model);
+
+        //dataset.clear();
+        db = FirebaseFirestore.getInstance();
+
         db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()

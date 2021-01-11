@@ -56,8 +56,12 @@ public class Chats extends Fragment
         recyclerView.setVisibility(View.VISIBLE);
 
         // recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-
         // custom adapters always populate the recycler view with items
+
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         chatsViewModel = new ViewModelProvider(this).get(ChatsViewModel.class);
         chatsViewModel.init();
@@ -71,10 +75,7 @@ public class Chats extends Fragment
             }
         });
 
-        linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(linearLayoutManager);
+
         chatsAdapter = new ChatsAdapter(getContext(),recyclerView,chatsViewModel.getChatlistmodel().getValue());
         recyclerView.setAdapter(chatsAdapter);
 
