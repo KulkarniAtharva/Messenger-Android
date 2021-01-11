@@ -65,9 +65,9 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 ## Built With 🛠
 - [Java]() - Best & Most used programming language for Android development.
 - Firebase
-   - Firebase Authentication
-   - Firebase Cloud Firestore
-   - Firebase Storage
+   - [Firebase Authentication](https://firebase.google.com/docs/auth) - Kowing the identity of the user to securely store the user data in the cloud and provide the same personalized experience across all of the user's devices
+   - [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore) - To store data & keep it in sync across client apps & provide offline support
+   - [Firebase Storage](https://firebase.google.com/docs/storage) - A storage service to store images, files, videos, audio
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
   - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Data objects that notify views when the underlying database changes.
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes. 
@@ -85,6 +85,18 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 
 ## 👨‍🔧 Architecture
 This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
+
+Personally, I think MVVM is the best way to structure code (in most situations). 
+
+The thing I like most about MVVM is the compartmentalization of the various components in a project. 
+
+1) The UI components are kept away from the business logic
+
+2) The business logic is kept away from the database operations
+
+3) It's easy to read (because everything has specific places to live)
+
+4) And if done correctly, you have a lot less to worry about when it comes to lifecycle events (ex: screen rotations)
 
 ![](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
 
