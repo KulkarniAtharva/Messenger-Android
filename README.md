@@ -79,6 +79,8 @@ Supports 1-1 chat,Group chats including sharing of Media(docs,images & contacts)
 - RxJava
 - RecyclerView
 
+Used ConstraintLayout
+
 ## Future Additions
 
 <BR><BR>
