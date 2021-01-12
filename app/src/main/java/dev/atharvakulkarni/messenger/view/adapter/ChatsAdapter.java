@@ -131,7 +131,7 @@ import dev.atharvakulkarni.messenger.view.ui.chat_person;
 }*/
 
 
-public class ChatsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder>
 {
     Context context;
     private List<ChatlistModel> chatlist;
@@ -164,14 +164,14 @@ public class ChatsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)   // to create view for recycler view item
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)   // to create view for recycler view item
     {
         View view = LayoutInflater.from(context).inflate(R.layout.chats_item,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
         object = chatlist.get(position);
 
@@ -179,7 +179,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 .load(userphotouris.get(position))
                 .into(holder.circleImageView);*/
 
-        (ViewHolder)holder).name.setText(object.name);
+        holder.name.setText(object.name);
         holder.lastmessage.setText(object.lastmessage);
         holder.count.setText(object.count);
         holder.lasttime.setText(object.last_time);

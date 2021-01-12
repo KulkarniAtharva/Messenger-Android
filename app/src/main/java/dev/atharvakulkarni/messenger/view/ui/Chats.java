@@ -43,6 +43,7 @@ public class Chats extends Fragment
     ChatsAdapter chatsAdapter;
     ArrayList<ChatlistModel> list = new ArrayList();
     ChatsViewModel chatsViewModel;
+    private ArrayList<ChatlistModel> dataset = new ArrayList<>();
 
     @Nullable
     @Override
@@ -58,10 +59,7 @@ public class Chats extends Fragment
         // recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         // custom adapters always populate the recycler view with items
 
-        linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(linearLayoutManager);
+
 
         chatsViewModel = new ViewModelProvider(this).get(ChatsViewModel.class);
         chatsViewModel.init();
@@ -71,13 +69,23 @@ public class Chats extends Fragment
             public void onChanged(List<ChatlistModel> chatlistModels)
             {
                 Toast.makeText(getContext(), "yoooo", Toast.LENGTH_SHORT).show();
+
+
+
                 chatsAdapter.notifyDataSetChanged();
             }
         });
 
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         chatsAdapter = new ChatsAdapter(getContext(),recyclerView,chatsViewModel.getChatlistmodel().getValue());
         recyclerView.setAdapter(chatsAdapter);
+
+
+
 
 
 
@@ -92,7 +100,7 @@ public class Chats extends Fragment
         super.onResume();
 
       //  list.clear();
-       // chatsAdapter.notifyDataSetChanged();
+        chatsAdapter.notifyDataSetChanged();
 
         getData();
     }
