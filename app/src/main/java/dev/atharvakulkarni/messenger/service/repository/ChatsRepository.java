@@ -45,11 +45,11 @@ public class ChatsRepository
 
     private void setChats()
     {
-        ChatlistModel model = new ChatlistModel("Username","names","photo","last_message","1","last_time");
-        dataset.add(model);
+        //ChatlistModel model = new ChatlistModel("Username","names","photo","last_message","1","last_time");
+       // dataset.add(model);
 
         //dataset.clear();
-       /* db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist")
                 .get()
@@ -80,6 +80,6 @@ public class ChatsRepository
                             }
                         }
                     }
-                });*/
+                });
     }
 }
