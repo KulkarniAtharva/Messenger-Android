@@ -51,7 +51,9 @@ public class ChatsRepository
         //dataset.clear();
         db = FirebaseFirestore.getInstance();
 
-        db.collection(UserModel.getUsername()).document("chatlist").collection("chatlist")
+        System.out.println(UserModel.getUsername());
+
+        db.collection("Atharva2204").document("chatlist").collection("chatlist")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
                 {
