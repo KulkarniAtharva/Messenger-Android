@@ -222,7 +222,7 @@ public class signin_signup extends AppCompatActivity
                    // FirebaseUser user = mAuth.getCurrentUser();
                     // updateUI(user);
 
-                   // Toast.makeText(signin_signup.this, "Success"+, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(signin_signup.this, "Success", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(signin_signup.this,MainActivity.class);
                     startActivity(intent);
