@@ -162,7 +162,7 @@ public class chat_person extends AppCompatActivity
         });
 
 
-        db.collection(UserModel.getUsername()).document("person").collection(chatwith_username)
+        db.collection("Atharva2204").document("person").collection(chatwith_username)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
                 {
@@ -287,7 +287,7 @@ public class chat_person extends AppCompatActivity
             msg.put("text", message);
 
             // Add a new document with a generated ID
-            db.collection(UserModel.getUsername()).document("person").collection(chatwith_username).document(String.valueOf(System.currentTimeMillis())).set(msg).addOnSuccessListener(new OnSuccessListener<Void>()
+            db.collection("Atharva2204").document("person").collection(chatwith_username).document(String.valueOf(System.currentTimeMillis())).set(msg).addOnSuccessListener(new OnSuccessListener<Void>()
                     {
                         private static final String TAG = "a";
 
