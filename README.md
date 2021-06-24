@@ -9,7 +9,7 @@ My Messenger series
    Part 3 - [Android App]()  - currently viewing    <BR> 
   <!-- Part 4 - [Web App using ReactJS & Firebase]()    <BR>  
    Part 4 - [Web App using Django & PostgreSQL]()   <BR>  -->
-   Part 4 - [ChatBot using Natural Language Processing]()     <BR>
+   Part 4 - [ChatBot using Natural Language Processing](https://github.com/KulkarniAtharva/Retrieval-Chatbot)     <BR>
    Part 5 - [One-PC-Facebook  using C++ & File Handling]()  <BR><BR><BR>
    <H3> <div align="center">Part 3 - Android App</div>       </H3>   <BR><BR><BR>
 </B>
