@@ -7,10 +7,10 @@ My Messenger series
 <B>Part 1 - [Flutter Mobile App]()    <BR>
    Part 2 - [Flutter Web App]()     <BR>
    Part 3 - [Android App]()  - currently viewing    <BR> 
-   Part 4 - [Web App using ReactJS & Firebase]()    <BR>
-   Part 5 - [Web App using Django & PostgreSQL]()   <BR>
-   Part 6 - [ChatBot using Natural Language Processing]()     <BR>
-   Part 7 - [One-PC-Facebook  using C++ & File Handling]()  <BR><BR><BR>
+  <!-- Part 4 - [Web App using ReactJS & Firebase]()    <BR>  
+   Part 4 - [Web App using Django & PostgreSQL]()   <BR>  -->
+   Part 4 - [ChatBot using Natural Language Processing]()     <BR>
+   Part 5 - [One-PC-Facebook  using C++ & File Handling]()  <BR><BR><BR>
    <H3> <div align="center">Part 3 - Android App</div>       </H3>   <BR><BR><BR>
 </B>
 
